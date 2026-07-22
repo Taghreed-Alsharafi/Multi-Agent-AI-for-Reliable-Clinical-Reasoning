@@ -106,6 +106,20 @@ App at [localhost:5173](http://localhost:5173), Swagger docs at
 
 </details>
 
+## Vercel deployment
+
+This repo can be deployed as a single Vercel project:
+
+- the React UI is built from `frontend/`
+- the FastAPI backend is exposed from `api/main.py`
+- production WebSocket traffic uses `/api/ws/assess`
+
+The checked-in [`vercel.json`](vercel.json) sets:
+
+- `buildCommand` to build the Vite frontend
+- `outputDirectory` to `frontend/dist`
+- a 60-second `maxDuration` for `api/main.py`
+
 ### Try the API directly
 
 ```bash
