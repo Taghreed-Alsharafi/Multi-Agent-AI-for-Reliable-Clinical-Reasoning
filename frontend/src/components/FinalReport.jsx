@@ -1,4 +1,5 @@
 import React from 'react';
+import { asArray, boundedPercent, displayText } from '../utils/format';
 
 export default function FinalReport({ safetyReport }) {
     if (!safetyReport) return null;
@@ -10,38 +11,39 @@ export default function FinalReport({ safetyReport }) {
         overall_confidence = 0,
         is_safe = false,
     } = safetyReport;
+    const confidence = boundedPercent(overall_confidence);
 
     return (
         <div className="final-report">
             <h3>
-                🛡️ Safety-Verified Final Report
+                Safety-Verified Final Report
                 <span className={`report-badge ${is_safe ? 'safe' : 'unsafe'}`}>
-                    {is_safe ? '✓ Verified Safe' : '⚠ Issues Found'}
+                    {is_safe ? 'Verified Safe' : 'Issues Found'}
                 </span>
             </h3>
 
-            <div className="report-summary">{final_summary}</div>
+            <div className="report-summary">{displayText(final_summary, 'No final summary was returned.')}</div>
 
-            {verified_findings.length > 0 && (
+            {asArray(verified_findings).length > 0 && (
                 <div className="verified-findings">
-                    <h4>✅ Verified Findings</h4>
-                    {verified_findings.map((finding, i) => (
+                    <h4>Verified Findings</h4>
+                    {asArray(verified_findings).map((finding, i) => (
                         <div key={i} className="verified-item">
                             <span className="check-icon">✓</span>
-                            <span>{finding}</span>
+                            <span>{displayText(finding, 'Verified finding')}</span>
                         </div>
                     ))}
                 </div>
             )}
 
-            {flagged_issues.length > 0 && (
+            {asArray(flagged_issues).length > 0 && (
                 <div className="flagged-issues">
-                    <h4>⚠️ Flagged Issues</h4>
-                    {flagged_issues.map((issue, i) => (
+                    <h4>Flagged Issues</h4>
+                    {asArray(flagged_issues).map((issue, i) => (
                         <div key={i} className="flagged-item">
-                            <div className="flag-specialist">{issue.specialist}</div>
-                            <div className="flag-claim">Claim: "{issue.claim}"</div>
-                            <div className="flag-issue">Issue: {issue.issue}</div>
+                            <div className="flag-specialist">{displayText(issue?.specialist, 'Safety review')}</div>
+                            <div className="flag-claim">Claim: "{displayText(issue?.claim || issue)}"</div>
+                            <div className="flag-issue">Issue: {displayText(issue?.issue, 'Needs review')}</div>
                         </div>
                     ))}
                 </div>
@@ -55,13 +57,13 @@ export default function FinalReport({ safetyReport }) {
                     <div
                         className="bar-fill"
                         style={{
-                            width: `${overall_confidence * 100}%`,
-                            background: is_safe ? 'var(--safety-color)' : 'var(--error-color)'
+                            width: `${confidence}%`,
+                            background: is_safe ? 'var(--safety-color)' : 'var(--error-color)',
                         }}
                     />
                 </div>
                 <div className="bar-label" style={{ color: is_safe ? 'var(--safety-color)' : 'var(--error-color)', fontWeight: 700 }}>
-                    {(overall_confidence * 100).toFixed(0)}%
+                    {confidence.toFixed(0)}%
                 </div>
             </div>
         </div>
