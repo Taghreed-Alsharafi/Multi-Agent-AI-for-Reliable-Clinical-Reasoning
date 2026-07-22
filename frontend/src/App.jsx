@@ -3,6 +3,20 @@ import InputPanel from './components/InputPanel';
 import PipelineFlow from './components/PipelineFlow';
 import './App.css';
 
+const emptyStages = () => ({
+  triage: null,
+  specialists: {},
+  specialtiesSpawned: false,
+  leadSpecialist: '',
+  consensus: null,
+  discussion: null,
+  judge: null,
+  safety: null,
+  safetyReport: null,
+  pipelineComplete: false,
+  error: null,
+});
+
 function resolveWebSocketUrl() {
   if (import.meta.env.VITE_WS_URL) {
     return import.meta.env.VITE_WS_URL;
@@ -23,54 +37,183 @@ function resolveWebSocketUrl() {
 
 const WS_URL = resolveWebSocketUrl();
 
+function resolveApiUrl() {
+  if (import.meta.env.VITE_API_URL) {
+    return import.meta.env.VITE_API_URL;
+  }
+
+  if (typeof window === 'undefined') {
+    return 'http://localhost:8000/assess';
+  }
+
+  const isLocalHost = ['localhost', '127.0.0.1'].includes(window.location.hostname);
+  if (isLocalHost) {
+    return 'http://localhost:8000/assess';
+  }
+
+  return '/api/assess';
+}
+
+const API_URL = resolveApiUrl();
+
+const specialistKey = (specialty) =>
+  `specialist_${String(specialty || 'general').toLowerCase().replace(/\s/g, '_')}`;
+
+function stagesFromRestResult(result) {
+  const specialists = {};
+  (result.specialist_opinions || []).forEach((opinion) => {
+    const specialty = opinion.specialty || opinion.name || 'Specialist';
+    specialists[specialistKey(specialty)] = {
+      specialty,
+      status: 'done',
+      summary: '',
+      data: opinion,
+    };
+  });
+
+  return {
+    triage: {
+      status: 'done',
+      summary: '',
+      data: result.supervisor,
+    },
+    specialists,
+    specialtiesSpawned: Object.keys(specialists).length > 0,
+    leadSpecialist: result.supervisor?.lead_specialist || '',
+    consensus: result.consensus || null,
+    discussion: {
+      message: 'Specialists completed their reviews.',
+      opinions_preview: result.specialist_opinions || [],
+    },
+    judge: {
+      status: 'done',
+      summary: '',
+      data: result.judge_report,
+    },
+    safety: {
+      status: 'done',
+      summary: '',
+      data: result.safety_report,
+    },
+    safetyReport: result.safety_report,
+    pipelineComplete: true,
+    error: null,
+  };
+}
+
 function App() {
   const [running, setRunning] = useState(false);
-  const [stages, setStages] = useState({
-    triage: null,
-    specialists: {},
-    specialtiesSpawned: false,
-    leadSpecialist: '',
-    consensus: null,
-    discussion: null,
-    judge: null,
-    safety: null,
-    safetyReport: null,
-    pipelineComplete: false,
-    error: null,
-  });
+  const [stages, setStages] = useState(emptyStages);
 
-  const [agentDrafts, setAgentDrafts] = useState({}); // New state for streaming tokens
+  const [agentDrafts, setAgentDrafts] = useState({});
 
   const wsRef = useRef(null);
+  const fallbackStartedRef = useRef(false);
+  const messageCountRef = useRef(0);
+  const completeRef = useRef(false);
+  const timersRef = useRef([]);
 
-  const resetStages = () => ({
-    triage: null,
-    specialists: {},
-    specialtiesSpawned: false,
-    leadSpecialist: '',
-    consensus: null,
-    discussion: null,
-    judge: null,
-    safety: null,
-    safetyReport: null,
-    pipelineComplete: false,
-    error: null,
-  });
+  const clearTimers = () => {
+    timersRef.current.forEach((timer) => clearTimeout(timer));
+    timersRef.current = [];
+  };
 
   const handleSubmit = useCallback(({ question, documents }) => {
     setRunning(true);
-    setStages(resetStages());
-    setAgentDrafts({}); // Clear previous drafts
+    fallbackStartedRef.current = false;
+    messageCountRef.current = 0;
+    completeRef.current = false;
+    clearTimers();
+    setStages({
+      ...emptyStages(),
+      triage: {
+        status: 'thinking',
+        summary: 'Starting secure assessment...',
+        data: null,
+      },
+    });
+    setAgentDrafts({});
+
+    const runRestAssessment = async (message) => {
+      if (fallbackStartedRef.current) return;
+      fallbackStartedRef.current = true;
+      clearTimers();
+
+      if (wsRef.current && wsRef.current.readyState < WebSocket.CLOSING) {
+        wsRef.current.close();
+      }
+
+      setStages((prev) => ({
+        ...prev,
+        triage: prev.triage || {
+          status: 'thinking',
+          summary: 'Running complete assessment...',
+          data: null,
+        },
+        error: null,
+      }));
+
+      try {
+        const response = await fetch(API_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ question, documents }),
+        });
+
+        if (!response.ok) {
+          const text = await response.text();
+          throw new Error(text || `Request failed with ${response.status}`);
+        }
+
+        const result = await response.json();
+        setStages(stagesFromRestResult(result));
+      } catch (error) {
+        console.error(message, error);
+        setStages((prev) => ({
+          ...prev,
+          error:
+            error?.message ||
+            'The assessment could not complete. Please try again.',
+        }));
+      } finally {
+        setRunning(false);
+      }
+    };
 
     const ws = new WebSocket(WS_URL);
     wsRef.current = ws;
 
+    timersRef.current.push(
+      setTimeout(() => {
+        runRestAssessment('Streaming connection timed out; using REST fallback.');
+      }, 5000),
+    );
+
     ws.onopen = () => {
+      clearTimers();
+      timersRef.current.push(
+        setTimeout(() => {
+          if (messageCountRef.current === 0) {
+            runRestAssessment('Streaming response stalled; using REST fallback.');
+          }
+        }, 12000),
+      );
       ws.send(JSON.stringify({ question, documents }));
     };
 
     ws.onmessage = (event) => {
-      const msg = JSON.parse(event.data);
+      if (fallbackStartedRef.current) return;
+
+      let msg;
+      try {
+        msg = JSON.parse(event.data);
+      } catch (error) {
+        console.error('Could not parse stream event:', error);
+        return;
+      }
+
+      messageCountRef.current += 1;
+      clearTimers();
       const { type, agent_name, data } = msg;
 
       setStages((prev) => {
@@ -180,6 +323,7 @@ function App() {
             break;
 
           case 'pipeline_complete':
+            completeRef.current = true;
             next.pipelineComplete = true;
             if (data?.safety_report) {
               next.safetyReport = data.safety_report;
@@ -203,29 +347,28 @@ function App() {
       });
 
       if (type === 'agent_stream') {
+        const token = data?.token || '';
+        if (!token || !agent_name) return;
+
         setAgentDrafts((prev) => ({
           ...prev,
-          [agent_name]: (prev[agent_name] || '') + data.token,
+          [agent_name]: (prev[agent_name] || '') + token,
         }));
       }
     };
 
     ws.onclose = () => {
+      clearTimers();
+      if (!fallbackStartedRef.current && !completeRef.current) {
+        runRestAssessment('Streaming closed before completion; using REST fallback.');
+        return;
+      }
       setRunning(false);
     };
 
     ws.onerror = (err) => {
       console.error('WebSocket error:', err);
-      // Fires when the backend is unreachable, which is by far the most
-      // common cause - say so rather than leaving a silent dead pipeline.
-      setStages((prev) => ({
-        ...prev,
-        error:
-          prev.error ||
-          `Could not reach the backend at ${WS_URL}. Start it with ` +
-            `start.bat (or "uvicorn api.main:app --reload") and try again.`,
-      }));
-      setRunning(false);
+      runRestAssessment('Streaming failed; using REST fallback.');
     };
   }, []);
 

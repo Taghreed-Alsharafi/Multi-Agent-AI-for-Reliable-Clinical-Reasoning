@@ -2,6 +2,6 @@
   "name": "multi-agent-medical-root",
   "private": true,
   "scripts": {
-    "build": "npm --prefix frontend install && npm --prefix frontend run build"
+    "build": "npm --prefix frontend ci && npm --prefix frontend run build"
   }
 }
