@@ -19,14 +19,14 @@ export default function InputPanel({ onSubmit, disabled }) {
 
     return (
         <form className="input-panel" onSubmit={handleSubmit}>
-            <h2>📋 Medical Assessment Query</h2>
+            <h2>Start a research assessment</h2>
 
             <div className="input-group">
-                <label htmlFor="question">Clinical Question</label>
+                <label htmlFor="question">Question for the agent team</label>
                 <input
                     id="question"
                     type="text"
-                    placeholder="e.g. What medications should be adjusted given the latest labs?"
+                    placeholder="Example: Which findings require the closest follow-up?"
                     value={question}
                     onChange={(e) => setQuestion(e.target.value)}
                     disabled={disabled}
@@ -34,10 +34,10 @@ export default function InputPanel({ onSubmit, disabled }) {
             </div>
 
             <div className="input-group">
-                <label htmlFor="documents">Patient Documents</label>
+                <label htmlFor="documents">De-identified case information</label>
                 <textarea
                     id="documents"
-                    placeholder={"Paste patient documents here (lab reports, clinical notes, etc.)\n\nSeparate multiple documents with a blank line."}
+                    placeholder={"Paste fictional or de-identified notes here.\n\nSeparate multiple documents with a blank line."}
                     value={documents}
                     onChange={(e) => setDocuments(e.target.value)}
                     disabled={disabled}
@@ -46,7 +46,7 @@ export default function InputPanel({ onSubmit, disabled }) {
             </div>
 
             <button type="submit" className="submit-btn" disabled={disabled || !question.trim() || !documents.trim()}>
-                {disabled ? '⏳ Pipeline Running...' : '🚀 Start Multi-Agent Assessment'}
+                {disabled ? 'Agents are reviewing the case...' : 'Run agent review'}
             </button>
         </form>
     );
