@@ -1,6 +1,16 @@
-# Multi-Agent AI for Reliable Clinical Reasoning
+<p align="center">
+  <img src="frontend/public/brand/clinical-agents-logo.png" width="120" alt="Clinical Agents shield logo">
+</p>
 
-[Open the live research demo](https://multi-agent-ai-clinical-reasoning.vercel.app)
+<h1 align="center">Multi-Agent AI for Reliable Clinical Reasoning</h1>
+
+<p align="center">
+  <strong><a href="https://multi-agent-ai-clinical-reasoning.vercel.app/">Live research demo</a></strong>
+</p>
+
+<p align="center">
+  Transparent specialist review, agreement analysis, and safety verification for clinical AI research.
+</p>
 
 A multi-agent pipeline that spawns a swarm of specialist AI agents to assess clinical
 documents, scores how much those specialists agree, consolidates their reviews, and
