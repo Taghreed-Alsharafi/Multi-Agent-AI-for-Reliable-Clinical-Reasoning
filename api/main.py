@@ -3,7 +3,6 @@
 from __future__ import annotations
 
 import json
-import traceback
 from datetime import datetime
 
 from fastapi import FastAPI, HTTPException, WebSocket, WebSocketDisconnect
@@ -95,7 +94,7 @@ async def assess(request: AssessRequest) -> AssessResponse:
             safety_report=result.safety_report,
         )
     except Exception as exc:
-        raise HTTPException(status_code=500, detail=f"Pipeline error: {exc}") from exc
+        raise HTTPException(status_code=500, detail=_explain(exc)) from exc
 
 
 # ── WebSocket Streaming Endpoint ──────────────────────────
@@ -148,8 +147,6 @@ async def ws_assess(websocket: WebSocket) -> None:
                 "type": "error",
                 "data": {
                     "message": _explain(exc),
-                    "detail": str(exc),
-                    "traceback": traceback.format_exc(),
                 },
             })
         except Exception:
