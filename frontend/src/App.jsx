@@ -112,60 +112,68 @@ function App() {
         },
       });
 
-      progressTimersRef.current = [
-        setTimeout(() => {
-          setStages((prev) => ({
-            ...prev,
-            specialtiesSpawned: true,
-            specialists: {
-              expert_matching: {
-                specialty: 'Expert Matching',
-                status: 'thinking',
-                summary: 'Identifying the specialties this case needs...',
-                data: null,
-              },
-              clinical_review: {
-                specialty: 'Clinical Review',
-                status: 'thinking',
-                summary: 'Reviewing findings and supporting evidence...',
-                data: null,
-              },
-              evidence_review: {
-                specialty: 'Evidence Review',
-                status: 'thinking',
-                summary: 'Checking the case details independently...',
-                data: null,
-              },
-            },
-          }));
-        }, 1800),
-        setTimeout(() => {
-          setStages((prev) => ({
-            ...prev,
-            discussion: {
-              message: 'Expert reviews are being compared.',
-              opinions_preview: [],
-            },
-            judge: {
-              status: 'thinking',
-              summary: 'Comparing expert opinions and resolving differences...',
-              data: null,
-            },
-          }));
-        }, 5200),
-        setTimeout(() => {
-          setStages((prev) => ({
-            ...prev,
-            safety: {
-              status: 'thinking',
-              summary: 'Preparing the final evidence-grounding check...',
-              data: null,
-            },
-          }));
-        }, 9000),
-      ];
-
       try {
+        const triageResponse = await fetch('/api/triage', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ question, documents }),
+        });
+        const triagePayload = await triageResponse.json();
+        if (!triageResponse.ok) {
+          throw new Error(
+            triagePayload.detail || 'The specialist team could not be selected.',
+          );
+        }
+
+        const selectedSpecialists = Object.fromEntries(
+          (triagePayload.specialties || []).map((specialty, index) => [
+            `specialist_${specialty.name
+              .toLowerCase()
+              .replace(/\s/g, '_')}`,
+            {
+              specialty: specialty.name,
+              status: 'thinking',
+              summary: `Analyzing from the ${specialty.name} perspective...`,
+              data: null,
+            },
+          ]),
+        );
+
+        setStages((prev) => ({
+          ...prev,
+          triage: { status: 'done', summary: '', data: triagePayload },
+          specialtiesSpawned: true,
+          specialists: selectedSpecialists,
+          leadSpecialist: triagePayload.lead_specialist || '',
+        }));
+
+        progressTimersRef.current = [
+          setTimeout(() => {
+            setStages((prev) => ({
+              ...prev,
+              discussion: {
+                message: 'The selected specialists are comparing evidence.',
+                opinions_preview: [],
+              },
+              judge: {
+                status: 'thinking',
+                summary: 'Preparing to consolidate the specialist reviews...',
+                data: null,
+              },
+            }));
+          }, 5500),
+          setTimeout(() => {
+            setStages((prev) => ({
+              ...prev,
+              safety: {
+                status: 'thinking',
+                summary: 'Preparing the final evidence-grounding check...',
+                data: null,
+              },
+            }));
+          }, 9500),
+        ];
+
         const response = await fetch('/api/assess', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
