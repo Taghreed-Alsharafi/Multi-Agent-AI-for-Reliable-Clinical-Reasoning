@@ -114,6 +114,22 @@ async def assess(request: AssessRequest) -> AssessResponse:
         raise HTTPException(status_code=500, detail=_explain(exc)) from exc
 
 
+@app.post("/triage", tags=["assessment"])
+@app.post("/api/triage", tags=["assessment"])
+async def triage(request: AssessRequest) -> dict:
+    """Select the case-specific specialist team before the full assessment."""
+    try:
+        combined_docs = "\n\n---\n\n".join(request.documents)
+        supervisor_input = (
+            f"## Question\n{request.question}\n\n"
+            f"## Patient Documents\n{combined_docs}"
+        )
+        response = await get_pipeline().supervisor_agent.run(supervisor_input)
+        return response.parsed
+    except Exception as exc:
+        raise HTTPException(status_code=500, detail=_explain(exc)) from exc
+
+
 # ── WebSocket Streaming Endpoint ──────────────────────────
 
 
