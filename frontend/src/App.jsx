@@ -45,6 +45,7 @@ function App() {
   const [agentDrafts, setAgentDrafts] = useState({}); // New state for streaming tokens
 
   const wsRef = useRef(null);
+  const progressTimersRef = useRef([]);
 
   const resetStages = () => ({
     triage: null,
@@ -83,6 +84,10 @@ function App() {
       specialtiesSpawned: true,
       leadSpecialist: result.supervisor?.lead_specialist || '',
       consensus: result.consensus,
+      discussion: {
+        message: 'The specialist team completed its evidence review.',
+        opinions_preview: result.specialist_opinions || [],
+      },
       judge: { status: 'done', summary: '', data: result.judge_report },
       safety: { status: 'done', summary: '', data: result.safety_report },
       safetyReport: result.safety_report,
@@ -98,6 +103,68 @@ function App() {
     // Vercel Functions do not provide a persistent WebSocket server. Production
     // uses the equivalent REST endpoint while local development keeps streaming.
     if (USE_REST_API) {
+      setStages({
+        ...resetStages(),
+        triage: {
+          status: 'thinking',
+          summary: 'Reading the case and selecting the right medical experts...',
+          data: null,
+        },
+      });
+
+      progressTimersRef.current = [
+        setTimeout(() => {
+          setStages((prev) => ({
+            ...prev,
+            specialtiesSpawned: true,
+            specialists: {
+              expert_matching: {
+                specialty: 'Expert Matching',
+                status: 'thinking',
+                summary: 'Identifying the specialties this case needs...',
+                data: null,
+              },
+              clinical_review: {
+                specialty: 'Clinical Review',
+                status: 'thinking',
+                summary: 'Reviewing findings and supporting evidence...',
+                data: null,
+              },
+              evidence_review: {
+                specialty: 'Evidence Review',
+                status: 'thinking',
+                summary: 'Checking the case details independently...',
+                data: null,
+              },
+            },
+          }));
+        }, 1800),
+        setTimeout(() => {
+          setStages((prev) => ({
+            ...prev,
+            discussion: {
+              message: 'Expert reviews are being compared.',
+              opinions_preview: [],
+            },
+            judge: {
+              status: 'thinking',
+              summary: 'Comparing expert opinions and resolving differences...',
+              data: null,
+            },
+          }));
+        }, 5200),
+        setTimeout(() => {
+          setStages((prev) => ({
+            ...prev,
+            safety: {
+              status: 'thinking',
+              summary: 'Preparing the final evidence-grounding check...',
+              data: null,
+            },
+          }));
+        }, 9000),
+      ];
+
       try {
         const response = await fetch('/api/assess', {
           method: 'POST',
@@ -115,6 +182,8 @@ function App() {
           error: error.message || 'The assessment could not be completed.',
         }));
       } finally {
+        progressTimersRef.current.forEach(clearTimeout);
+        progressTimersRef.current = [];
         setRunning(false);
       }
       return;
