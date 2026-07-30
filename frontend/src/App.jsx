@@ -299,8 +299,8 @@ function App() {
           <span className="brand-eyebrow">Clinical AI research platform</span>
           <h1>Multi-Agent Clinical Reasoning</h1>
           <p>
-            See how independent AI specialists review the same case, compare
-            evidence, resolve disagreements, and run a final safety check.
+            A dynamic team of medical AI experts, assembled for each case's
+            complexity and needs.
           </p>
         </div>
       </header>
