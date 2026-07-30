@@ -3,20 +3,6 @@ import InputPanel from './components/InputPanel';
 import PipelineFlow from './components/PipelineFlow';
 import './App.css';
 
-const emptyStages = () => ({
-  triage: null,
-  specialists: {},
-  specialtiesSpawned: false,
-  leadSpecialist: '',
-  consensus: null,
-  discussion: null,
-  judge: null,
-  safety: null,
-  safetyReport: null,
-  pipelineComplete: false,
-  error: null,
-});
-
 function resolveWebSocketUrl() {
   if (import.meta.env.VITE_WS_URL) {
     return import.meta.env.VITE_WS_URL;
@@ -36,184 +22,113 @@ function resolveWebSocketUrl() {
 }
 
 const WS_URL = resolveWebSocketUrl();
-
-function resolveApiUrl() {
-  if (import.meta.env.VITE_API_URL) {
-    return import.meta.env.VITE_API_URL;
-  }
-
-  if (typeof window === 'undefined') {
-    return 'http://localhost:8000/assess';
-  }
-
-  const isLocalHost = ['localhost', '127.0.0.1'].includes(window.location.hostname);
-  if (isLocalHost) {
-    return 'http://localhost:8000/assess';
-  }
-
-  return '/api/assess';
-}
-
-const API_URL = resolveApiUrl();
-
-const specialistKey = (specialty) =>
-  `specialist_${String(specialty || 'general').toLowerCase().replace(/\s/g, '_')}`;
-
-function stagesFromRestResult(result) {
-  const specialists = {};
-  (result.specialist_opinions || []).forEach((opinion) => {
-    const specialty = opinion.specialty || opinion.name || 'Specialist';
-    specialists[specialistKey(specialty)] = {
-      specialty,
-      status: 'done',
-      summary: '',
-      data: opinion,
-    };
-  });
-
-  return {
-    triage: {
-      status: 'done',
-      summary: '',
-      data: result.supervisor,
-    },
-    specialists,
-    specialtiesSpawned: Object.keys(specialists).length > 0,
-    leadSpecialist: result.supervisor?.lead_specialist || '',
-    consensus: result.consensus || null,
-    discussion: {
-      message: 'Specialists completed their reviews.',
-      opinions_preview: result.specialist_opinions || [],
-    },
-    judge: {
-      status: 'done',
-      summary: '',
-      data: result.judge_report,
-    },
-    safety: {
-      status: 'done',
-      summary: '',
-      data: result.safety_report,
-    },
-    safetyReport: result.safety_report,
-    pipelineComplete: true,
-    error: null,
-  };
-}
+const USE_REST_API =
+  typeof window !== 'undefined' &&
+  !['localhost', '127.0.0.1'].includes(window.location.hostname);
 
 function App() {
   const [running, setRunning] = useState(false);
-  const [stages, setStages] = useState(emptyStages);
+  const [stages, setStages] = useState({
+    triage: null,
+    specialists: {},
+    specialtiesSpawned: false,
+    leadSpecialist: '',
+    consensus: null,
+    discussion: null,
+    judge: null,
+    safety: null,
+    safetyReport: null,
+    pipelineComplete: false,
+    error: null,
+  });
 
-  const [agentDrafts, setAgentDrafts] = useState({});
+  const [agentDrafts, setAgentDrafts] = useState({}); // New state for streaming tokens
 
   const wsRef = useRef(null);
-  const fallbackStartedRef = useRef(false);
-  const messageCountRef = useRef(0);
-  const completeRef = useRef(false);
-  const timersRef = useRef([]);
 
-  const clearTimers = () => {
-    timersRef.current.forEach((timer) => clearTimeout(timer));
-    timersRef.current = [];
+  const resetStages = () => ({
+    triage: null,
+    specialists: {},
+    specialtiesSpawned: false,
+    leadSpecialist: '',
+    consensus: null,
+    discussion: null,
+    judge: null,
+    safety: null,
+    safetyReport: null,
+    pipelineComplete: false,
+    error: null,
+  });
+
+  const applyCompletedResult = (result) => {
+    const specialists = Object.fromEntries(
+      (result.specialist_opinions || []).map((opinion, index) => [
+        `specialist_${(opinion.specialty || index)
+          .toString()
+          .toLowerCase()
+          .replace(/\s/g, '_')}`,
+        {
+          specialty: opinion.specialty || `Specialist ${index + 1}`,
+          status: 'done',
+          summary: '',
+          data: opinion,
+        },
+      ]),
+    );
+
+    setStages({
+      ...resetStages(),
+      triage: { status: 'done', summary: '', data: result.supervisor },
+      specialists,
+      specialtiesSpawned: true,
+      leadSpecialist: result.supervisor?.lead_specialist || '',
+      consensus: result.consensus,
+      judge: { status: 'done', summary: '', data: result.judge_report },
+      safety: { status: 'done', summary: '', data: result.safety_report },
+      safetyReport: result.safety_report,
+      pipelineComplete: true,
+    });
   };
 
-  const handleSubmit = useCallback(({ question, documents }) => {
+  const handleSubmit = useCallback(async ({ question, documents }) => {
     setRunning(true);
-    fallbackStartedRef.current = false;
-    messageCountRef.current = 0;
-    completeRef.current = false;
-    clearTimers();
-    setStages({
-      ...emptyStages(),
-      triage: {
-        status: 'thinking',
-        summary: 'Starting secure assessment...',
-        data: null,
-      },
-    });
-    setAgentDrafts({});
+    setStages(resetStages());
+    setAgentDrafts({}); // Clear previous drafts
 
-    const runRestAssessment = async (message) => {
-      if (fallbackStartedRef.current) return;
-      fallbackStartedRef.current = true;
-      clearTimers();
-
-      if (wsRef.current && wsRef.current.readyState < WebSocket.CLOSING) {
-        wsRef.current.close();
-      }
-
-      setStages((prev) => ({
-        ...prev,
-        triage: prev.triage || {
-          status: 'thinking',
-          summary: 'Running complete assessment...',
-          data: null,
-        },
-        error: null,
-      }));
-
+    // Vercel Functions do not provide a persistent WebSocket server. Production
+    // uses the equivalent REST endpoint while local development keeps streaming.
+    if (USE_REST_API) {
       try {
-        const response = await fetch(API_URL, {
+        const response = await fetch('/api/assess', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ question, documents }),
         });
-
+        const payload = await response.json();
         if (!response.ok) {
-          const text = await response.text();
-          throw new Error(text || `Request failed with ${response.status}`);
+          throw new Error(payload.detail || 'The assessment could not be completed.');
         }
-
-        const result = await response.json();
-        setStages(stagesFromRestResult(result));
+        applyCompletedResult(payload);
       } catch (error) {
-        console.error(message, error);
         setStages((prev) => ({
           ...prev,
-          error:
-            error?.message ||
-            'The assessment could not complete. Please try again.',
+          error: error.message || 'The assessment could not be completed.',
         }));
       } finally {
         setRunning(false);
       }
-    };
+      return;
+    }
 
     const ws = new WebSocket(WS_URL);
     wsRef.current = ws;
 
-    timersRef.current.push(
-      setTimeout(() => {
-        runRestAssessment('Streaming connection timed out; using REST fallback.');
-      }, 5000),
-    );
-
     ws.onopen = () => {
-      clearTimers();
-      timersRef.current.push(
-        setTimeout(() => {
-          if (messageCountRef.current === 0) {
-            runRestAssessment('Streaming response stalled; using REST fallback.');
-          }
-        }, 12000),
-      );
       ws.send(JSON.stringify({ question, documents }));
     };
 
     ws.onmessage = (event) => {
-      if (fallbackStartedRef.current) return;
-
-      let msg;
-      try {
-        msg = JSON.parse(event.data);
-      } catch (error) {
-        console.error('Could not parse stream event:', error);
-        return;
-      }
-
-      messageCountRef.current += 1;
-      clearTimers();
+      const msg = JSON.parse(event.data);
       const { type, agent_name, data } = msg;
 
       setStages((prev) => {
@@ -323,7 +238,6 @@ function App() {
             break;
 
           case 'pipeline_complete':
-            completeRef.current = true;
             next.pipelineComplete = true;
             if (data?.safety_report) {
               next.safetyReport = data.safety_report;
@@ -347,37 +261,55 @@ function App() {
       });
 
       if (type === 'agent_stream') {
-        const token = data?.token || '';
-        if (!token || !agent_name) return;
-
         setAgentDrafts((prev) => ({
           ...prev,
-          [agent_name]: (prev[agent_name] || '') + token,
+          [agent_name]: (prev[agent_name] || '') + data.token,
         }));
       }
     };
 
     ws.onclose = () => {
-      clearTimers();
-      if (!fallbackStartedRef.current && !completeRef.current) {
-        runRestAssessment('Streaming closed before completion; using REST fallback.');
-        return;
-      }
       setRunning(false);
     };
 
     ws.onerror = (err) => {
       console.error('WebSocket error:', err);
-      runRestAssessment('Streaming failed; using REST fallback.');
+      // Fires when the backend is unreachable, which is by far the most
+      // common cause - say so rather than leaving a silent dead pipeline.
+      setStages((prev) => ({
+        ...prev,
+        error:
+          prev.error ||
+          `Could not reach the backend at ${WS_URL}. Start it with ` +
+            `start.bat (or "uvicorn api.main:app --reload") and try again.`,
+      }));
+      setRunning(false);
     };
   }, []);
 
   return (
     <div className="app">
       <header className="app-header">
-        <h1>🤖 Multi-Agent Medical Assessment</h1>
-        <p>Dynamic AI specialist swarm with real-time safety verification</p>
+        <img
+          className="brand-logo"
+          src="/brand/clinical-agents-logo.png"
+          alt="Clinical Agents shield logo"
+        />
+        <div className="brand-copy">
+          <span className="brand-eyebrow">Clinical AI research platform</span>
+          <h1>Multi-Agent Clinical Reasoning</h1>
+          <p>
+            See how independent AI specialists review the same case, compare
+            evidence, resolve disagreements, and run a final safety check.
+          </p>
+        </div>
       </header>
+
+      <div className="demo-notice" role="note">
+        <strong>Live research demo</strong>
+        <span>Use fictional or de-identified information only.</span>
+        <span>Not medical advice or a diagnostic tool.</span>
+      </div>
 
       <InputPanel onSubmit={handleSubmit} disabled={running} />
 
