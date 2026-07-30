@@ -54,9 +54,16 @@ def _explain(exc: Exception) -> str:
     name = type(exc).__name__
     text = str(exc).lower()
 
-    if "authentication" in text or "api key" in text or name == "AuthenticationError":
+    if (
+        "authentication" in text
+        or "api key" in text
+        or "api_key" in text
+        or "missing credentials" in text
+        or name == "AuthenticationError"
+    ):
         return (
-            "The OpenAI API rejected the key. Check OPENAI_API_KEY in your .env file."
+            "The AI service is not configured for this deployment. "
+            "The project owner must add OPENAI_API_KEY in the hosting settings."
         )
     if "rate limit" in text or name == "RateLimitError":
         return "The OpenAI API rate limit was hit. Wait a moment and try again."
