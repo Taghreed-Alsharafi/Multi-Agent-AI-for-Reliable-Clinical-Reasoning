@@ -1,6 +1,6 @@
-# Multi-Agent Medical Assessment
+# Multi-Agent AI for Reliable Clinical Reasoning
 
-[Live Vercel deployment](https://multi-agent-ai-clinical-reasoning.vercel.app)
+[Open the live research demo](https://multi-agent-ai-clinical-reasoning.vercel.app)
 
 A multi-agent pipeline that spawns a swarm of specialist AI agents to assess clinical
 documents, scores how much those specialists agree, consolidates their reviews, and
