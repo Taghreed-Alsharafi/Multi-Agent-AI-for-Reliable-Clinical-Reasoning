@@ -32,7 +32,17 @@ app.add_middleware(
 )
 
 # ── Shared pipeline ──────────────────────────────────────
-pipeline = AgentPipeline()
+# Constructing the OpenAI client at import time makes even /health fail when
+# credentials have not been configured yet (for example, on a fresh deploy).
+pipeline: AgentPipeline | None = None
+
+
+def get_pipeline() -> AgentPipeline:
+    """Create the agent pipeline only when an assessment needs it."""
+    global pipeline
+    if pipeline is None:
+        pipeline = AgentPipeline()
+    return pipeline
 
 
 def _explain(exc: Exception) -> str:
@@ -82,7 +92,7 @@ async def health_check() -> HealthResponse:
 async def assess(request: AssessRequest) -> AssessResponse:
     """Run the full pipeline (non-streaming)."""
     try:
-        result = await pipeline.run(
+        result = await get_pipeline().run(
             question=request.question,
             documents=request.documents,
         )
@@ -127,7 +137,7 @@ async def ws_assess(websocket: WebSocket) -> None:
             await websocket.send_text(event.to_json())
 
         # Run the streaming pipeline
-        result = await pipeline.run_streaming(
+        result = await get_pipeline().run_streaming(
             question=question,
             documents=documents,
             callback=send_event,
