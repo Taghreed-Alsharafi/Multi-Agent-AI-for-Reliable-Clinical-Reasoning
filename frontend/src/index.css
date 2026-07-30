@@ -95,24 +95,76 @@ body::before {
 }
 
 .app-header {
-  text-align: center;
-  padding: 32px 0 16px;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  text-align: left;
+  padding: 36px 0 18px;
+  max-width: 920px;
+}
+
+.brand-logo {
+  width: 104px;
+  height: 104px;
+  flex: 0 0 auto;
+  object-fit: contain;
+  filter: drop-shadow(0 12px 28px rgba(0, 212, 255, 0.18));
+}
+
+.brand-copy {
+  max-width: 760px;
+}
+
+.brand-eyebrow {
+  display: block;
+  margin-bottom: 6px;
+  color: var(--triage-color);
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
 }
 
 .app-header h1 {
-  font-size: 2rem;
+  font-size: clamp(2rem, 4vw, 3.25rem);
   font-weight: 800;
-  letter-spacing: -0.03em;
-  background: linear-gradient(135deg, var(--triage-color), var(--specialist-color), var(--safety-color));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  line-height: 1.02;
+  letter-spacing: -0.045em;
+  color: #f7f9fd;
 }
 
 .app-header p {
-  color: var(--text-secondary);
-  font-size: 0.95rem;
-  margin-top: 6px;
+  max-width: 680px;
+  color: #aeb8cb;
+  font-size: 1rem;
+  line-height: 1.65;
+  margin-top: 12px;
+}
+
+.demo-notice {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: fit-content;
+  max-width: 100%;
+  padding: 10px 14px;
+  color: #c7cfdd;
+  font-size: 0.78rem;
+  background: rgba(245, 158, 11, 0.07);
+  border: 1px solid rgba(245, 158, 11, 0.22);
+  border-radius: 999px;
+}
+
+.demo-notice strong {
+  color: #fbbf24;
+  letter-spacing: 0.02em;
+}
+
+.demo-notice span + span::before {
+  content: '•';
+  margin-right: 12px;
+  color: rgba(251, 191, 36, 0.5);
 }
 
 /* ─── Input Panel ───────────────────────────────────────── */
@@ -935,6 +987,29 @@ body::before {
 
   .app-header h1 {
     font-size: 1.5rem;
+  }
+
+  .app-header {
+    align-items: flex-start;
+    gap: 14px;
+    padding-top: 20px;
+  }
+
+  .brand-logo {
+    width: 64px;
+    height: 64px;
+  }
+
+  .demo-notice {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 3px;
+    width: 100%;
+    border-radius: var(--radius-md);
+  }
+
+  .demo-notice span + span::before {
+    display: none;
   }
 
   .input-panel {
