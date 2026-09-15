@@ -45,8 +45,7 @@ approximately **43% relative reduction in observed safety violations**.
 
 Multi-agent values are the best observed result for each metric across the evaluated
 agreement methods; they do not all come from one configuration. Results are
-experimental rather than clinical validation. Full method-level metrics are in the
-[dated results file](results/agreement-2026-09-15/final_main_comparison.csv).
+experimental rather than clinical validation.
 
 ## Pipeline
 
@@ -152,28 +151,14 @@ repository or browser application.
 The API supports standard assessments and live progress streaming while preserving
 the same supervisor, specialist, agreement, judge, and safety workflow.
 
-## Documentation
+## Research code
 
-The repository includes the complete thesis-facing research package:
-
-- [Thesis method and overall results](docs/THESIS_EXPERIMENT_METHOD.md)
-- [Evaluation protocol](docs/Evaluation-Protocol.md)
-- [Complete prompt register](docs/THESIS_PROMPTS.md)
-- [Master methodology and experimental setup](docs/MASTER_THESIS_METHOD_AND_EXPERIMENTAL_SETUP.docx)
-- [Final thesis results report](results/thesis-final/reports/THESIS_RESULTS.pdf)
-- [Method, results, and discussion](results/thesis-final/reports/THESIS_METHOD_RESULTS_DISCUSSION.docx)
-- [Agreement-method and accuracy-safety figures](results/thesis-final/figures)
-- [Final metrics, validation, selection, and reproducible predictions](results/thesis-final)
-
-The system documentation is also available as
-[`PDF`](docs/System-Documentation.pdf) and [`Word`](docs/System-Documentation.docx).
-
-Both files are generated from one source, so they cannot drift apart:
-
-```bash
-pip install -e ".[docs]"
-python docs/build_docs.py docs
-```
+The repository keeps the complete executable research implementation without
+separate thesis documents or generated reports. Versioned prompts are defined in
+[`evaluation/mcq_v2_prompts.py`](evaluation/mcq_v2_prompts.py), agreement methods in
+[`evaluation/agreement_analysis.py`](evaluation/agreement_analysis.py), and the final
+evaluation workflow in
+[`evaluation/final_agreement_experiment.py`](evaluation/final_agreement_experiment.py).
 
 ## Tests
 
@@ -196,14 +181,12 @@ pytest tests/ -v
 ├── frontend/        # React + Vite UI
 ├── evaluation/      # Agreement methods, prompts, metrics, and experiments
 ├── thesis_pipeline/ # Reproducible thesis workflow and statistical analysis
-├── notebooks/       # Master and experiment notebooks
-├── results/         # Curated final results and thesis artifacts
-├── docs/            # Methods, protocol, prompt register, and reports
+├── data/             # Fixed evaluation splits required by the tests
 └── tests/
 ```
 
-Agent roles and evaluation procedures are documented in the repository's `skills/`,
-`evaluation/`, and `docs/` directories.
+Agent roles and evaluation procedures are implemented in the repository's `skills/`
+and `evaluation/` directories.
 
 ## License
 
