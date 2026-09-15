@@ -88,26 +88,31 @@ Question + Documents
 
 ## Agreement methodology
 
-Agreement is evaluated from both the agents' selected answers and their uncertainty.
-The framework distinguishes genuine consensus from agreement produced by weak or
-poorly calibrated confidence, and it preserves abstentions rather than forcing them
-into the majority calculation.
+Each case is reviewed independently by four agents that receive the same question and
+answer options but use complementary reasoning roles: **direct diagnosis**,
+**elimination**, **pathophysiology/first principles**, and an **independent second
+opinion**. Every agent returns one option, a confidence score, and a short rationale;
+agents do not see one another's initial responses.
 
-The evaluation compares complementary agreement methods:
+Agreement is evaluated from both answer consistency and confidence. Six candidate
+methods are compared on the development split only: vote entropy, Jensen-Shannon
+divergence, Krippendorff's alpha, uncertainty-aware alpha, Kendall's W, and CARE
+consensus. Selection follows a prespecified hierarchy: accuracy within one percentage
+point of the best result, then safety-error rate, Macro F1, and additional model calls.
+The selected policy is frozen before held-out testing.
 
-- **Vote entropy** measures how concentrated or divided the panel's decisions are.
-- **Jensen-Shannon divergence** compares the agents' probability distributions.
-- **Krippendorff's alpha** and **Cohen's kappa** estimate agreement beyond chance.
-- **Uncertainty-aware alpha** reduces the influence of poorly supported confidence.
-- **Kendall's W** measures consistency across ranked judgments.
-- **CARE with a guideline guard** combines calibrated agreement with a narrow,
-  auditable safety rule.
+For the final framework, unanimous panels are accepted directly. Any disagreement
+(two or more distinct answers) triggers a judge that re-evaluates the original case
+and the agents' rationales instead of applying a simple majority vote. This selective
+adjudication policy was tuned only on Dataset 1's development split, evaluated on its
+1,583-case held-out test split, and then applied unchanged to all 1,200 MedQA-USMLE
+cases.
 
-Agreement does not determine correctness by itself. The final judge reviews the
-original case and specialist evidence, resolves conflicts by clinical relevance, and
-passes the result through an independent safety check. Performance differences are
-assessed on identical cases using bootstrap confidence intervals and paired McNemar
-testing. Implementations are available in
+All systems are compared on identical case IDs. Accuracy and Macro F1 are reported
+with bootstrap confidence intervals, and paired correctness differences are tested
+with McNemar's test. Implementations are in
+[`thesis_pipeline/multi_agent.py`](thesis_pipeline/multi_agent.py),
+[`thesis_pipeline/methods.py`](thesis_pipeline/methods.py), and
 [`evaluation/agreement_analysis.py`](evaluation/agreement_analysis.py).
 
 ## Quick start
