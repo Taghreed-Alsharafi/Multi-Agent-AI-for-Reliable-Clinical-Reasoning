@@ -9,7 +9,10 @@ configurations achieved **73.0% accuracy** and a **1.33% safety-violation rate**
 matched single-agent baseline achieved **72.0% accuracy** and a **2.33%
 safety-violation rate**. The observed result favors the multi-agent approach on both
 headline measures, while the small accuracy difference and limited sample require
-cautious interpretation.
+cautious interpretation. Best observed multi-agent secondary metrics were **81.7%
+Macro F1**, **73.0% weighted F1**, **82.3% macro precision**, and **81.6% macro
+recall**; the single-agent values were **81.1%**, **72.0%**, **81.7%**, and **81.1%**,
+respectively. Best multi-agent values may represent different agreement methods.
 
 This is a research evaluation, not clinical validation. Detailed method-level values
 are maintained in `results/agreement-2026-09-15/final_main_comparison.csv`.

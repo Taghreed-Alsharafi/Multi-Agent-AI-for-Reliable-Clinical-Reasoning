@@ -33,14 +33,20 @@ single-agent baseline achieved **72.0% accuracy** with a **2.33% safety-violatio
 rate**. This corresponds to a **1.0 percentage-point accuracy improvement** and an
 approximately **43% relative reduction in observed safety violations**.
 
-| Overall result | Multi-agent | Single agent |
+| Overall metric | Best multi-agent | Single agent |
 |---|---:|---:|
 | Cases evaluated | 300 | 300 |
-| Best accuracy | **73.0%** | 72.0% |
-| Lowest observed safety-violation rate | **1.33%** | 2.33% |
+| Accuracy | **73.0%** | 72.0% |
+| Macro F1 | **81.7%** | 81.1% |
+| Weighted F1 | **73.0%** | 72.0% |
+| Macro precision | **82.3%** | 81.7% |
+| Macro recall | **81.6%** | 81.1% |
+| Safety-violation rate (lower is better) | **1.33%** | 2.33% |
 
-These results are experimental rather than clinical validation. Full method-level
-metrics are available in the [dated results file](results/agreement-2026-09-15/final_main_comparison.csv).
+Multi-agent values are the best observed result for each metric across the evaluated
+agreement methods; they do not all come from one configuration. Results are
+experimental rather than clinical validation. Full method-level metrics are in the
+[dated results file](results/agreement-2026-09-15/final_main_comparison.csv).
 
 ## Pipeline
 

@@ -8,7 +8,13 @@ The frozen 300-case evaluation found a best multi-agent accuracy of **73.0%** an
 lowest observed multi-agent safety-violation rate of **1.33%**. The matched
 single-agent baseline achieved **72.0% accuracy** and a **2.33% safety-violation
 rate**. Overall, the multi-agent approach produced a modest accuracy gain and fewer
-observed safety violations in this experimental dataset.
+observed safety violations in this experimental dataset. Its best observed secondary
+scores were **81.7% Macro F1**, **73.0% weighted F1**, **82.3% macro precision**, and
+**81.6% macro recall**, compared with **81.1%**, **72.0%**, **81.7%**, and **81.1%**
+for the single-agent baseline, respectively.
+
+The best multi-agent value for each metric may come from a different agreement
+configuration; the detailed table should be used for method-specific interpretation.
 
 These findings support continued evaluation; they do not establish clinical safety
 or readiness for patient-care use. Detailed method-level results are retained in
