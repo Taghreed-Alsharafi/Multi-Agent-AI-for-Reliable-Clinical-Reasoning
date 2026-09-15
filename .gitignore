@@ -2,10 +2,10 @@
 .env
 .env.*
 !.env.example
-!.env.*.example
-.vercel/
+.envrc
 *.pem
 *.key
+.vercel/
 
 # ── Python ───────────────────────────────────────────────
 __pycache__/
@@ -15,6 +15,7 @@ __pycache__/
 build/
 dist/
 .pytest_cache/
+.ipynb_checkpoints/
 .ruff_cache/
 .mypy_cache/
 .venv/
@@ -32,5 +33,6 @@ yarn-error.log*
 # ── Editors / OS ─────────────────────────────────────────
 .vscode/
 .idea/
+.claude/
 .DS_Store
 Thumbs.db
