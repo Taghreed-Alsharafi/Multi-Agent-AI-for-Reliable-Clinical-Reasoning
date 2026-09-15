@@ -154,10 +154,19 @@ the same supervisor, specialist, agreement, judge, and safety workflow.
 
 ## Documentation
 
-[`docs/System-Documentation.pdf`](docs/System-Documentation.pdf) and
-[`.docx`](docs/System-Documentation.docx) are an 11-page write-up of the architecture,
-agent roles, agreement methodology, event protocol, validation, and limitations —
-written for academic use.
+The repository includes the complete thesis-facing research package:
+
+- [Thesis method and overall results](docs/THESIS_EXPERIMENT_METHOD.md)
+- [Evaluation protocol](docs/Evaluation-Protocol.md)
+- [Complete prompt register](docs/THESIS_PROMPTS.md)
+- [Master methodology and experimental setup](docs/MASTER_THESIS_METHOD_AND_EXPERIMENTAL_SETUP.docx)
+- [Final thesis results report](results/thesis-final/reports/THESIS_RESULTS.pdf)
+- [Method, results, and discussion](results/thesis-final/reports/THESIS_METHOD_RESULTS_DISCUSSION.docx)
+- [Agreement-method and accuracy-safety figures](results/thesis-final/figures)
+- [Final metrics, validation, selection, and reproducible predictions](results/thesis-final)
+
+The system documentation is also available as
+[`PDF`](docs/System-Documentation.pdf) and [`Word`](docs/System-Documentation.docx).
 
 Both files are generated from one source, so they cannot drift apart:
 
@@ -185,7 +194,11 @@ pytest tests/ -v
 ├── config/          # Environment-driven settings
 ├── skills/          # Markdown prompt/reference packs per agent role
 ├── frontend/        # React + Vite UI
-├── docs/            # Academic system documentation (.docx + .pdf)
+├── evaluation/      # Agreement methods, prompts, metrics, and experiments
+├── thesis_pipeline/ # Reproducible thesis workflow and statistical analysis
+├── notebooks/       # Master and experiment notebooks
+├── results/         # Curated final results and thesis artifacts
+├── docs/            # Methods, protocol, prompt register, and reports
 └── tests/
 ```
 
