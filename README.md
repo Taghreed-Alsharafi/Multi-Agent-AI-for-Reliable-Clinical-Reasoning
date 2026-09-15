@@ -30,10 +30,10 @@ reproducible evaluation pipeline for comparing multi-agent and single-agent syst
 The frozen multi-agent framework was evaluated on two medical MCQ datasets. Dataset 1
 used a held-out test split; Dataset 2 tested generalizability without further tuning.
 
-| Dataset | Evaluated cases | Multi-agent accuracy | Single-GPT accuracy | Multi-agent Macro F1 |
-|---|---:|---:|---:|---:|
-| Dataset 1, MedMCQA-style test split | 1,583 | **73.78%** | 72.84% | 69.32% |
-| Dataset 2, MedQA-USMLE | 1,200 | **89.75%** | 87.17% | **89.58%** |
+| Dataset | Evaluated cases | Multi-agent accuracy | Single-GPT accuracy | Multi-agent Macro F1 | Single-GPT Macro F1 |
+|---|---:|---:|---:|---:|---:|
+| Dataset 1, MedMCQA-style test split | 1,583 | **73.78%** | 72.84% | 69.32% | **70.03%** |
+| Dataset 2, MedQA-USMLE | 1,200 | **89.75%** | 87.17% | **89.58%** | 86.87% |
 
 On Dataset 1, the accuracy difference versus Single GPT was +0.95 percentage points
 (`p = 0.1548`). On Dataset 2, the improvement was +2.58 percentage points. These are
