@@ -63,6 +63,7 @@ class SpecialistAgent(BaseAgent):
 
         # Load professional skill set
         super().__init__()  # Call super init first to set project_root
+        self._model = get_settings().SPECIALIST_MODEL
         skill_instructions = self.load_skill("medical-specialist")
 
         self.system_prompt = (

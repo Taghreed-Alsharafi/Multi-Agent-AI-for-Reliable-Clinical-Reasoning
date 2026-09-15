@@ -1,0 +1,368 @@
+instruction,input,output,answer_text,row_id,case_id,answer_status,answer_method,answer_confidence,fixed_case_id,reference_letter
+"Please answer the following multiple-choice question:
+A 45-year-old premenopausal woman undergoes a left breast lumpectomy for a 1.5 cm, lymph node positive, hormone sensitive invasive breast cancer. She receives chemotherapy, radiotherapy, and is on tamoxifen. Recommended follow-up after therapy should always include:?
+A. Blood tumor markers drawn every 3-6 months after treatment.
+B. Routine monitoring of liver function tests (LFTs) every 3-6 months after treatment.
+C. Yearly bone scans.
+D. Routine clinical examination every 3-6 months for the first 5 years after treatment as well as continued yearly mammography.",,D,Routine clinical examination every 3-6 months for the first 5 years after treatment as well as continued yearly mammography.,8924,7e99f4190d26e3b68413541c742af3e96ebc326182714497d37765ec0266a902,SOURCE_DERIVED_HIGH,final_marker_text,0.9,0104f9a1b6c143cff5fa106c67c5c346f0dd65db979a8447ec2c4c518a86d927,D
+"Please answer the following multiple-choice question:
+""SAFE"" strategy for control of trachoma; 'S'-stands for: September 2008?
+A. Safety
+B. Solutions
+C. Surgery
+D. Side-effects",,C,Surgery,4050,50fad02f987ca1b0e58b603659ad03f0f8421fbfad06b4952f80d5b2c91e9243,SOURCE_DERIVED_HIGH,explicit_phrase_text,1.0,06192f675c4c4ba6cc91bc1f7bff2dee5d5f531c9acf597392dd89d822c85d5b,C
+"Please answer the following multiple-choice question:
+A 45 year old female complains of progressive weakness and spasticity of the lower limb with difficulty in micturition. CT scan shows an intradural mid dorsal midline enhancing lesion. The likely diagnosis is:?
+A. Meningioma
+B. Intradermal Lipoma
+C. Neuroepithelial Cyst
+D. Dermoid Cyst",,A,Meningioma,8745,5574db35feebb43e1e0cb2f0a1acc42e5347bc46998acf2daf2fd4c04ef9b179,SOURCE_DERIVED_HIGH,final_marker_text,1.0,0b4e5755618f1e2f90f1239a36b35d29e0b3612edd63ee02c881aa49fb0fa546,A
+"Please answer the following multiple-choice question:
+""Nut meg"" liver is seen in:?
+A. CVC Liver
+B. Liver infarction
+C. Amyloidosis
+D. Budd chiari syndrome",,A,CVC Liver,4005,2f6219753ccab01e7c5f11b97529f3afb03b3bc9a0b93d1b336272347e3f3e8b,SOURCE_DERIVED_MODERATE,conclusion_sentence,0.76,0ca000db77bd5f0a466e3e0c69c6b744b54eb2dd4a6e19c565d16c54b4b44a37,A
+"Please answer the following multiple-choice question:
+A 20-year-old female comes to the physician because she has never had a perioD. She has no medical problems, has never had surgery, and takes no medications. Examination shows that she is a tall female with long extremities. She has normal size breasts, although the areolas are pale. She has little axillary hair. Pelvic examination is significant for scant pubic hair and a sho, blind- ended vaginal pouch. Which of the following is the most appropriate next step in the management of this patient?
+A. No intervention is necessary
+B. Bilateral gonadectomy
+C. Unilateral gonadectomy
+D. Bilateral mastectomy",,B,Bilateral gonadectomy,6048,b395c76aa20c6231a67e75cb55b376389c2f895e83cb1dc87c1870287ca24e48,SOURCE_DERIVED_HIGH,final_marker_text,0.9,15f917c50671dfb50de46c2016f8626e810a4e7f62dd9cddaa48baa585b7ef7f,B
+"Please answer the following multiple-choice question:
+A 32-year-old male basketball player comes down hard on his ankle. He is admitted to the outpatient clinic, and radiographic examination reveals a Pott's fracture. What ligament is most likely injured?
+A. Calcaneofibular ligament
+B. Deltoid ligament
+C. Spring ligament
+D. Plantar ligament",,B,Deltoid ligament,7653,48e4f732511ed6c9323979a4970da5c33f8d0191b30313c73efdc13aa913d066,SOURCE_DERIVED_HIGH,final_marker_text,0.9,1a59e8d129cbe7ea32b9fb99fc6006b6f3e96ce2bd649f899a35eec02666fe6a,B
+"Please answer the following multiple-choice question:
+What is deficient in exclusively breast fed baby ?
+A. Vitamin B
+B. Vitamin A
+C. Vitamin C
+D. Proteins",,A,Vitamin B,10,de619ee4521ea9b24e0756b86325e4ae4fd0ddb9595cc43dd48507a5851c023a,SOURCE_DERIVED_MODERATE,explicit_phrase_text,0.86,1a7ef1b9f2de638f9d3d48fea4b5d41cf71cfd5b3359580aba984e3315ff959e,A
+"Please answer the following multiple-choice question:
+A 52 year old woman presented with weakness of shoulder movements. Investigations revealed quadrangular space syndrome. Which of the following nerve is likely to be affected ?
+A. Brachial plexus
+B. Axillary nerve
+C. Median nerve
+D. Radial nerve",,B,Axillary nerve,9512,13d487f2d5f3e00a6d7a15225fd24f178e93a32d3202d9e6ccb67aa5a4b36f94,SOURCE_DERIVED_HIGH,final_marker_text,0.9,1ab48eb0f095948e0abee79c2401d512bf579d8ffbf284c83b98708ce35f99fe,B
+"Please answer the following multiple-choice question:
+False about reversible cell injury?
+A. Amorphous densities formation in the mitochondrial matrix
+B. ATP generation decreased
+C. Blebs formation in plasma membrane
+D. Ribosomes detachment from the granular ER",,C,Blebs formation in plasma membrane,1699,39ce129697bae9bce800697073b7f67908d00f11fb401c841e4a0e966baf6c0f,SOURCE_DERIVED_MODERATE,explicit_phrase_text,0.86,21ce6f1d539e8200ce1209d78499f62e8bdd475e4afae3bb1b136073bc983ea8,C
+"Please answer the following multiple-choice question:
+A 19-year-old male has a history of athlete's foot but is otherwise healthy when he develops the sudden onset of fever and pain in the right foot and leg. On physical exam, the foot and leg are fiery red with a well-defined indurated margin that appears to be rapidly advancing. There is tender inguinal lymphadenopathy. The most likely organism to cause this infection is?
+A. Staphylococcus epidermidis
+B. Tinea pedis
+C. Streptococcus pyogenes
+D. Mixed anaerobic infection",,C,Streptococcus pyogenes,5810,3b54633bc726c90ee290692822d16e69d419b266f6ed9e8daae45caa2f8b13ff,SOURCE_DERIVED_MODERATE,conclusion_sentence,0.76,22fc9e7a33e6229e2d233d5ea500f4f5495e87d35f069129389c92975d159e95,C
+"Please answer the following multiple-choice question:
+A 58 year old male presents with fatigue, abdominal pain and bloody stools. Colonoscopy reveals a mass in the descending colon. For surgical removal of the mass, ligation of which of the following arteries is required?
+A. Superior mesenteric artery
+B. Inferior mesenteric artery
+C. External iliac artery
+D. Internal iliac artery",,B,Inferior mesenteric artery,9812,c71e8a6c4a97a9aaadfec09f4124128ae59d853878968154d986f12fafeca4b1,SOURCE_DERIVED_HIGH,final_marker_text,1.0,2a25035f1889e46d6a675cecfd63ea6e6c6d99526bc3e82fccd28f68ce360096,B
+"Please answer the following multiple-choice question:
+A 50 year old female is admitted with abdominal pain and anuria. Radiological studies revealed bilateral impacted ureteric stones with hydronephrosis. Urine analysis showed RBCs with pus cells in urine. Serum creatinine level was 16 mg/dl and urea level was 200 mmol/1. Which of the following should be the immediate treatment?
+A. Hemodialysis
+B. 'J' stent drainage
+C. Lithotripsy
+D. Ureteroscopic removal of stones",,B,'J' stent drainage,9292,cf98e3eafdc887e5ea25dfed45d611fc67c31e2aae49382fea342fe579ce950a,SOURCE_DERIVED_HIGH,final_marker_text,0.9,2f27b9e1baa0a66597992b8ed69434e83c3a76957ff096d7b77265b810bc9c99,B
+"Please answer the following multiple-choice question:
+Dribbling of saliva is feature of: JIPMER 14?
+A. Antemoem hanging
+B. Strangulation
+C. Postmoem hanging
+D. Drowning",,D,Drowning,2029,33206abd57fb2706ab923e773d2fc4c1579905c996753c7131fde142483a339d,SOURCE_DERIVED_MODERATE,conclusion_sentence,0.76,3519487aa98ebdf47f2b11ae849d5c086ad7a4583babd36bdf5b398c45d2ec9e,D
+"Please answer the following multiple-choice question:
+A 15 year old girl presented with weakness for 2 months. On examination she had pallor and icterus. Spleen was palpable. Lab examination findings are increased MCV, reduced MCHC, reticulocystosis. Osmotic fragility test is positive and Coomb's test is negative. Diagnosis is?
+A. Iron deficiency anemia
+B. AIHA
+C. G-6-PD deficiency anemia
+D. Hereditary spherocytosis",,D,Hereditary spherocytosis,5562,20b8cfa467a2eed0c38f6306b30f73ccbae0c83e4865707b5d719e8c19d13d28,SOURCE_DERIVED_HIGH,final_marker_text,1.0,367378d3008e6662b1af690d46c12c6f65d3ed32d236ba9cea525f1f888f7f6c,D
+"Please answer the following multiple-choice question:
+A 40-year-old man has been infected with HIV for the past 10 years. During this time, he has had several bouts of oral candidiasis, but no major illnesses. He is now diagnosed with Kaposi sarcoma involving the skin. He has had a 7-kg weight loss in the past 6 months. Laboratory studies show the HIV-1 RNA viral load is currently 60,000 copies/mL. Which of the following types of cells is most depleted in his lymph nodes?
+A. CD4+ lymphocyte
+B. CD8+ lymphocyte
+C. CD19+ lymphocyte
+D. Macrophage",,A,CD4+ lymphocyte,8505,666e880170b4b4a6f1eb177590d08b87e662bfb507f5beef35e700ff3ef44f94,SOURCE_DERIVED_HIGH,final_marker_text,0.9,3802cc8d909e8591226cd6cab763824ba9ba57dd9e8b87cc2fb5b9a1ae6ad29f,A
+"Please answer the following multiple-choice question:
+Rotameters?
+A. Depend on laminar low for their accuracy
+B. Will only function when upright
+C. Are constant pressure drop-constant orifice devices
+D. Are not accurate below 1L/min",,B,Will only function when upright,547,cb71fdc1d90a29b8f736bc8eeb2241af53e01e9bbe1a463d4124155769a384ca,SOURCE_DERIVED_MODERATE,tail_unique_option,0.8,407b20473fd32c93766e5b49c7fa29c610a0db914db4759bef5e021d13bdf585,B
+"Please answer the following multiple-choice question:
+A 27-year-old male presents with a testicular mass, which is resected and diagnosed as being a yolk sac tumor. Which one of the listed substances is most likely to be increased in this patient's serum as a result of being secreted from the cells of this tumor?
+A. Acid phosphatase
+B. a fetoprotein (AFP)
+C. Alkaline phosphatase
+D. b-human chorionic gonadotropin (b-hCG)",,B,a fetoprotein (AFP),6944,7c2c7ef8ea516ef68db114ab4b43bdfd36eb25d2a480be6cce5b7cf88d0cfa96,SOURCE_DERIVED_HIGH,final_marker_text,0.9,4301c0ab0c7fdab44b41b266525842c244c9fd4afbb5825b7c801fec2122206b,B
+"Please answer the following multiple-choice question:
+Four days after undergoing a craniotomy and evacuation of a subdural hematoma, a 56-year-old man has severe pain and swelling of his right leg. He has chills and nausea. He has type 2 diabetes mellitus and chronic kidney disease, and was started on hemodialysis 2 years ago. Prior to admission, his medications were insulin, enalapril, atorvastatin, and sevelamer. His temperature is 38.3°C (101°F), pulse is 110/min, and blood pressure is 130/80 mm Hg. Examination shows a swollen, warm, and erythematous right calf. Dorsiflexion of the right foot causes severe pain in the right calf. The peripheral pulses are palpated bilaterally. Cardiopulmonary examination shows no abnormalities. Laboratory studies show:
+Hemoglobin 10.1 g/dL
+Leukocyte count 11,800/mm3
+Platelet count 230,000/mm3
+Serum
+Glucose 87 mg/dL
+Creatinine 1.9 mg/dL
+Which of the following is the most appropriate next step in treatment?""?
+A. Unfractionated heparin therapy
+B. Inferior vena cava filter
+C. Urokinase therapy
+D. Warfarin therapy\n\",,B,Inferior vena cava filter,3768,7bc5549c542962047465cc844c7fa27f62444df8903e9cd14e82bfb977989b0c,SOURCE_DERIVED_MODERATE,tail_unique_option,0.8,43380232b606ca676cdcd1f62809dc485546a79962c841ce8e79617245354800,B
+"Please answer the following multiple-choice question:
+For better detection of an early lesion use:?
+A. Low KVp
+B. Low mA
+C. Low exposure time
+D. All of the above",,D,All of the above,2853,2ed94d3774c1774289bae28f972363010333c10d9646e66be224e344236c4966,SOURCE_DERIVED_HIGH,explicit_phrase_text,1.0,4c4fe1c4c3124e3f25873f5eb531ab51c25c8d14be49214814eee3f91ae1ec42,D
+"Please answer the following multiple-choice question:
+In Jorgenson technique drugs given by IV routes are:?
+A. Pentobarbitol
+B. Scopalamine
+C. Pethidine
+D. All of the above",,D,All of the above,2252,2103f841b07d4ca3a09672b2847431b55e278d990af05ac65084a5be34a93e7e,SOURCE_DERIVED_HIGH,explicit_phrase_text,1.0,4cf0431147162c84f3b1ee4df64903893ca40c882a57376557cf76b5909e9849,D
+"Please answer the following multiple-choice question:
+Vegetable poison mimicking viper snake poison is?
+A. Madar
+B. Croton
+C. Abrus
+D. Semicarpus",,D,Semicarpus,1409,0199b6e1e8f4f3c869a7f8ab979a5c41432f607c3103de749a6a3e103c439801,SOURCE_DERIVED_MODERATE,conclusion_sentence,0.76,4d5faa4698e17b9e10eb9dd3f80cf961c8627eb6b075b2897a23dad36fa2ce0b,D
+"Please answer the following multiple-choice question:
+A 55 year old diabetic man is brought to the emergency room in an unresponsive state. The following laboratory values are obtained: PCO2 19 mm Hg, HCO3 11 mEq/L, and pH 6.9. The most appropriate immediate treatment of this patient is ?
+A. Administration of an oral hypoglycemic agent
+B. Administration of bicarbonate
+C. Administration of insulin
+D. Close observation only",,C,Administration of insulin,9597,b0dd9a4597eb0264cd7dea158b2f833fc0aa2a5bc272082ec502f41a2051818a,SOURCE_DERIVED_HIGH,final_marker_text,0.9,4efee548a4f26e1de9078aa0218af7c541812b571d328f00857bc2216f0cd9f4,C
+"Please answer the following multiple-choice question:
+The recommended daily energy intake of an adult woman with heavy work is?
+A. 2900
+B. 1800
+C. 2100
+D. 2300",,A,2900,2140,d79907c88ebbffee8e19c36260959cb97ff83c20354ad30a7099f25092c7f372,SOURCE_DERIVED_MODERATE,explicit_phrase_text,0.86,4fd2930af5c19cdae85763920e1f1a3d34b93dc14c52cf016cfc050530bb4ec2,A
+"Please answer the following multiple-choice question:
+26 yr old female came for the first time in OPD with lump in breast first investigation?
+A. USG
+B. Mammogram
+C. MRI
+D. PET scan",,B,Mammogram,847,4717cf6f2f4b44c7479a96cf4ab227953ae896c25d80846071685fd703c617b6,SOURCE_DERIVED_HIGH,explicit_phrase_text,1.0,52b3f4e7565d14f26775c35801001a4a91ae458392106731a44c2055f06e4a0b,B
+"Please answer the following multiple-choice question:
+A 3-month-old child has a typical mewing cry and a congenital hea disease. The most probable chromosomal abnormality is:?
+A. 5q-
+B. 5p-
+C. 4p-
+D. 9p-",,B,5p-,7217,313de79cbe26e61453814898af98a727437cfffef69e6bbac4b9c25626d080ca,SOURCE_DERIVED_HIGH,final_marker_text,0.9,5ac160de061ef453299b8d6a9d7c98439f963cc3a26dfc26163af7b5ab303761,B
+"Please answer the following multiple-choice question:
+A 3 day neonate has refusal to feeding and gets with vomiting on forceful feeding. There is also abdominal distension. Urine Benedict's test is positive. Which of the following Reducing substance is likley to be found in urine?
+A. Galactose
+B. Glucose
+C. Fructose
+D. Sucrose",,C,Fructose,1382,4bcc0e2886836a184c109514889436fc5b163fb7e3f8d78501a5ffd9c2db7b8d,SOURCE_DERIVED_MODERATE,conclusion_sentence,0.76,6680a88286f566bbccbcadcef456c3a2e7de5c18f965144ea0d7b2abec9b61c0,C
+"Please answer the following multiple-choice question:
+A 10 year old boy develops an itchy, vesicular rash, which is maximal on his face and trunk. Physical examination demonstrates a mixture of lesions, with macules, papules, vesicles, and crusted lesions. The mother repos that the lesions seem to be occurring in crops. Which of the following is the most likely diagnosis?
+A. Herpes simplex I
+B. Herpes simplex II
+C. Measles
+D. Varicella",,D,Varicella,5241,8bd8b55362621e4fa0caedf2d596f98f9cc7bd2ad41fa07ceb28b408490b7776,SOURCE_DERIVED_HIGH,final_marker_text,0.9,68da436f35d92b6563f297490cb1a11d0f5de723a2fac9764d2b5ff241470701,D
+"Please answer the following multiple-choice question:
+A 23-year-old homeless man is found to have consumed alcohol adulterated with methanol. He is started on treatment effective for minimizing the toxicity to methanol. Which of the following is the most likely explanation for the benefit of this treatment?
+A. enhances renal excretion of methanol
+B. prevents biotransformation of methanol
+C. combines to form a nontoxic polymer
+D. changes the toxin's volume of distribution",,B,prevents biotransformation of methanol,6822,df54327c333b7d1aafb5980ba85a94a360380cc29e7a49a6fb9b1cfcc5e78efc,SOURCE_DERIVED_HIGH,final_marker_text,0.9,6df66a20f36b558561a426c2fb36c0f03137d69f4b16a4986d4368043ace4241,B
+"Please answer the following multiple-choice question:
+A 45-year-old man comes to the physician for a 2-day history of headache and breathlessness on exertion. During the same period, he has vomited twice and not passed urine. He also reports pain and stiffness in his fingers that has worsened progressively over the past 2 years. He has no history of serious illness and takes no medications. He does not smoke or drink alcohol. He is in moderate distress. His temperature is 37.2°C (98.9°F), pulse is 88/min, blood pressure is 170/100 mm Hg, and respirations are 24/min. Pulse oximetry on room air shows an oxygen saturation of 91%. Examination reveals pallor, 2+ pretibial edema, and jugular venous distention. The skin on the arms, chest, and upper back is coarse and thickened. Diffuse cutaneous hyperpigmentation and hypopigmented patches with perifollicular hypopigmentation are noted. Contractures are present in the proximal interphalangeal joints of both hands. Diffuse crackles are heard on auscultation of the chest. There is dullness to percussion and decreased breath sounds over both lung bases. S1 and S2 are normal. An S3 gallop is heard at the apex. The remainder of the examination shows no abnormalities. His hemoglobin concentration is 8.1 g/dL, and his serum creatinine is 5.3 mg/dL. Further evaluation of this patient is most likely to show which of the following?
+A. Increased anticentromere antibody titers
+B. Decreased serum haptoglobin levels
+C. Increased total iron binding capacity
+D. Increased anti-CCP antibody titers\n\",,B,Decreased serum haptoglobin levels,3619,25dcbf7d0f6ed396be449ba2d55214d464d6c15763650703b72d9225f843e343,SOURCE_DERIVED_HIGH,explicit_phrase_text,1.0,710f8b6e27dfdfe882fff0334c98949d3370dbbe5c2295f312148e5fb6876646,B
+"Please answer the following multiple-choice question:
+In paogram, first time of the initial markings are made in:?
+A. Left side of the action line
+B. On the action line
+C. On the ale line
+D. Right side of the ale line",,C,On the ale line,669,3d5d562c9d93d6cbbb170f770507e4cc05a027193c9bb252e6ed35ae3eb0cc6a,SOURCE_DERIVED_MODERATE,explicit_phrase_text,0.86,7c8b28b39dc13c83b8c8597033fd298b5680077e989efc3fbc357136e217514f,C
+"Please answer the following multiple-choice question:
+A 58 year old man shows positive Rinne test. He probably have:?
+A. Wax in ear
+B. Chronic suppurative otitis media
+C. Otomycosis
+D. Normal hearing",,B,Chronic suppurative otitis media,9816,b9523bdde345767830e5e2be814198adbf05ce7e5efb18666e0e9f32453c2e8e,SOURCE_DERIVED_HIGH,final_marker_text,0.9,7eec8c31a472f6ffc9752c308f8acfcaa8c4eccf752e38ae96bdccc6b482eb97,B
+"Please answer the following multiple-choice question:
+A 20-years old nulliparous women is on oral contraceptives pills. She is currently diagnosed as having pulmonary tuberculosis. Which anti-tubercular drug decreases the effect of OCP:?
+A. INH
+B. Pyrazinamide
+C. Ethambutol
+D. Rifampicin",,D,Rifampicin,6113,3aafcc843b429d9a857a70e7a52dfece398ab537ce9cba6d7c3a02e0d59bc048,SOURCE_DERIVED_HIGH,final_marker_text,0.9,8899e503a27be43cb290e1b94b14aac9849fd49787e79ab623f4bf776dee01de,D
+"Please answer the following multiple-choice question:
+'Mission Indradhanush' includes all of the vaccines except:?
+A. BCG
+B. Japanese Encephalitis
+C. Typhoid
+D. Measles",,C,Typhoid,4249,61e4e97d5a8b81c957955389f31118cb9f7612da33b411d1d2c9d3974608bf6d,SOURCE_DERIVED_HIGH,explicit_phrase_text,1.0,8b9bf61adf71580ae069bf3b56a04ba7921808005231856138368bcdf2bc8e70,C
+"Please answer the following multiple-choice question:
+Barium oesophagogram findings in carcinoma esophagus are all EXCEPT?
+A. Distortion of the esophageal lumen
+B. Annular stricture
+C. Edges of filling defect are not clear-cut
+D. Irregular \rat - tail\ filling defect of the distal esophagus",,D,Irregular \rat - tail\ filling defect of the distal esophagus,1155,55820fc28e5c94c67525e918058492f2d4b540cafbadf9c22376e5693a1431b1,SOURCE_DERIVED_MODERATE,tail_unique_option,0.8,8d29da50bee2a7f24898383a94500513668c1b43e8a552e3eb8931c3d9e82fd5,D
+"Please answer the following multiple-choice question:
+A 2 month old baby with acute viral hepatitis like illness slips into encephalopathy after 48 hours. The mother is a known hepatitis B carrier Mother's hepatitis B virus serological profile is most likely to be:?
+A. HbsAg positive only
+B. HbsAg and HbeAg positive
+C. HbsAg and Hbe antibody positive
+D. HBVDNA positive",,B,HbsAg and HbeAg positive,5878,1e82dc785104ed78e6ef47d25b07d21e84e6cfeee254d5a3b8d4a95f1f45d4e6,SOURCE_DERIVED_HIGH,final_marker_text,0.9,9018c42cefbdcc7f03675d694bbcb41a796b76f7bd995d452c5558a81f7296fd,B
+"Please answer the following multiple-choice question:
+A 10 year old girl presents with sore throat and fever. She denies any cough or rhinorrhea. A throat culture grows bacitracin-sensitive bacterial colonies. The infecting organism would be protected from the lytic action of detergents by its?
+A. Keratin-like proteins in the spore coat
+B. Lipopolysaccharide in the outer membrane
+C. Peptidoglycan layer
+D. Periplasmic space",,C,Peptidoglycan layer,5265,1bbd077263d14a0b51bb252f189a4c3a75db2edf139ba2916a0ecc0cdba47504,SOURCE_DERIVED_HIGH,final_marker_text,0.9,949d57cbb108508a9162f54512c4a20df84891445c4d9667771422b0c95d5c3d,C
+"Please answer the following multiple-choice question:
+Non-Polar Amino Acids are?
+A. Alanine
+B. Tryptophan
+C. Isoleucine
+D. Lysine",,A,Alanine,3037,e7eba0f3418559c5fe0f9a92939983d8ef828ae446327f79bf5f2bbb2dafae80,SOURCE_DERIVED_MODERATE,conclusion_sentence,0.76,9981ffba15f8e2e1d4ef9e6ada7c98be372bba3fa4dc3b7765b9ce6f45f347ea,A
+"Please answer the following multiple-choice question:
+A 27 year old sexually active male develops a vesiculobullous lesion on the glans soon after within 8hrs taking tablet diclofenac for viral fever. The lesion healed with hyperpigmentation.The most likely dignosis is-?
+A. Behcet's syndrome
+B. herpes genitalis
+C. fixed drug erruption
+D. pemphigus vulgaris",,C,fixed drug erruption,6937,c150e78a1b1fe5b1198d11d5288e92f08f9e0d812f43e0fa1b5f9fcd09643086,SOURCE_DERIVED_HIGH,explicit_phrase_text,0.97,a11fcb4b44fe00ccf5c07ae150aafea16b1a4d8bfc4776d2fac4dc09da8a5fe0,C
+"Please answer the following multiple-choice question:
+A 5 year 11 months old female patient complains about the irritation in the gums over her back tooth. Intraorally a white hard spicule was seen embedded overlying the crest of the ridge. With the given findings and radiograph presented, What will be the diagnosis for this condition?
+A. Eruption cyst
+B. Eruption sequestrum
+C. Calculus
+D. Epstein’s pearls",,B,Eruption sequestrum,9128,923a0f93684debaed295f5378fe643038206a9f054c7459e699e512173273a3b,SOURCE_DERIVED_MODERATE,conclusion_sentence,0.76,a32bc1188b1aa8821277cdc881a675320c57b5f01258fd0df2ae4e67bc7c5256,B
+"Please answer the following multiple-choice question:
+A 19-year-old man working as a driver comes to Psychiatrist with excessive anxiety and fear. He repos that every time he drives over a bump in the road, he is convinced that he has accidentally run over a small child. He has to pull over and check underneath his car for blood and retrace his driving route to look for any injured children. As a result, he is always late for work.He also has intrusive thoughts about stabbing his coworkers.He prays to try to erase these thoughts from his mind, but this rarely helps. First-line pharmacological treatment of this patient's condition primarily affects which of the following neurotransmitters?
+A. Acetylcholine
+B. Dopamine
+C. Norepinephrine
+D. Serotonin",,D,Serotonin,5814,b534e32aa2e800cadfbf60a420b5d5c037a3a736b60d8530aa7918136ddf33a9,SOURCE_DERIVED_HIGH,final_marker_text,1.0,a45f14cc0156d2c13f7e84e349165b56c7a9e05d8769e88b7f7f4cb4e3352c1a,D
+"Please answer the following multiple-choice question:
+A 3-month-old girl was referred for recurrent fever, pneumonia, diarrhea, chronic dermatitis, failure to thrive, and motor retardation. The patient was the daughter of consanguineous parents and had a female sibling who had died due to recurrent infections. She suffered from oral thrush and a diffuse brownish colored macular rash on the trunk. Chest auscultation revealed bilateral crackles at the lower zones. Chest X-ray, indicated the absence of thymus shadow; a para-cardiac infiltration and an inferolateral squaring scapulae were demonstrated.Laboratory tests revealed mild anemia with profound lymphocytopenia, and hypogammaglobulinemia. adenosine deaminase (ADA) enzyme activities were low.What is the diagnosis?
+A. Gout
+B. Dwarfism
+C. Mental retardation
+D. Immunodeficiency",,D,Immunodeficiency,7210,321a5e44b1385e8bdff5336cd3cd30019ebd2ea7982240ee50923a78dda14748,SOURCE_DERIVED_HIGH,final_marker_text,0.9,a5178b23b1de0bfcf6145f2107773bf8487114d8cdd54b2f08fbbab3beb3c41b,D
+"Please answer the following multiple-choice question:
+A 37-year-old woman presents to the emergency room after falling down some stairs at work. She reports no pre-monitory symptoms prior to the fall or any loss of consciousness. Recently she has noticed persistent symptoms of fatigue, muscle weakness, and unexpected weight gain. She has no past medical history and is not taking any medications.On examination, the blood pressure is 164/92 mm Hg and heart rate is 84/min. There are multiple skin bruises, facial fullness, and truncal obesity with red ""stretch marks."" Muscle strength in the proximal muscles is 4/5 and the reflexes are normal. Which of the following is the most appropriate initial diagnostic test?
+A. computerized tomography (CT) scan of the abdomen
+B. fasting glucose
+C. overnight dexamethasone suppression test
+D. electromyogram (EMG) studies",,C,overnight dexamethasone suppression test,8101,7f6e53639c04a50a304f470e4246d6fb194cc32c5466c01be828ce6d23e0e3e0,SOURCE_DERIVED_HIGH,final_marker_text,0.9,a5923d7eab799b1a39f76141cee5be4b11c6c8198927f0543663aad6a9a23004,C
+"Please answer the following multiple-choice question:
+A 40 year old male had undergone splenectomy 20 years ago. Peripheral blood smear examination would show the presence of -?
+A. Dohle bodies
+B. Hypersegmented neutrophils
+C. Spherocytes
+D. Howell-Jolly bodies",,D,Howell-Jolly bodies,8653,c9365a0bbb936421ce58cd48dcf2781a792056c18a3615a9d83c86e0665d33bd,SOURCE_DERIVED_HIGH,final_marker_text,0.9,aa556a90a3d2819d3338fa79c35971d83cfc0619f5f04e81362081959842a139,D
+"Please answer the following multiple-choice question:
+A 25 year old male presents with a history of chronic diarrhea. Pathological examination reveals cryptitis and crypt abscesses. The likely diagnosis is:?
+A. Crohn's disease
+B. Ulcerative colitis
+C. Giardiasis
+D. Microscipic colitis",,B,Ulcerative colitis,6547,b1cb53e6dd8eae3c6ea258e0bfcfadf4c821e612e2ed3c66f6ff986195569f5e,SOURCE_DERIVED_HIGH,final_marker_text,0.9,adadff7fabc8a18f283c988092c0f81adce4eca488c1994e244f7880fd1e2d19,B
+"Please answer the following multiple-choice question:
+""Raptures of the depth"" are caused by:?
+A. CO narcosis
+B. CO2 narcosis
+C. N2 narcosis
+D. O2 toxicity",,C,N2 narcosis,4018,f477d3aaceac83f62d969a172631fb8b5ee0a7e9c2f411dffc9379bb225f1e00,SOURCE_DERIVED_HIGH,final_marker_text,1.0,b65c2f345d35808b3bad9f2a56d22a4ed0cc8535768114cd956e4407e8e4905c,C
+"Please answer the following multiple-choice question:
+A 52-year-old businessman with nephrotic syndrome after a non-stop flight from New York to New Delhi presents with sudden onset of breathlessness, haemoptysis, and chest pain. He is brought into Casualty in shock. His chest X-ray is normal. The ECG shows sinus tachycardia.?
+A. Pneumothorax
+B. Myocardial infarction
+C. Pulmonary embolism
+D. Aoic dissection",,C,Pulmonary embolism,9525,58872f7cdcd69fdd732444e110bc342b28c34111f5f491da66aef621209e2a0b,SOURCE_DERIVED_HIGH,final_marker_text,1.0,b75ae842b06fc3b6847db876b039cd7ffa2d04e7a01f174404f53b372951201e,C
+"Please answer the following multiple-choice question:
+A 1-week-old girl was admitted to NICU for evaluation of vomiting and severe dehydration. On examination there is hyperpigmentation of the nipples and virilization. Her laboratory repos shows serum sodium levels very low and serum potassium levels are high but there is no haemolysis and serum glucose is 44 mg/dL. Which of the following is the most likely diagnosis?
+A. Pyloric stenosis
+B. Secondary hypothyroidism
+C. Hyperaldosteronism
+D. Congenital adrenal hyperplasia",,D,Congenital adrenal hyperplasia,5202,7d29228e75af92c7d5908a3aa57418e7fc6e59b3d5614bf02249ba5a851579b1,SOURCE_DERIVED_HIGH,final_marker_text,0.9,be91f84e7dc39951a37392740c9f3ac828222bb0cb0dd8aca96915ea0d514333,D
+"Please answer the following multiple-choice question:
+A 25-year-old woman presents with symptoms of fatigue and weakness. On examination, there is diplopia, ptosis, weakness, and fatigability of muscles on repeated use. Which of the following is the most likely diagnosis?
+A. myasthenia gravis
+B. multiple sclerosis
+C. TIAs
+D. muscular dystrophy",,A,myasthenia gravis,6818,fb30c86c06b98b610f5edb6eed76b3aa4a681c71d2cc4296dab38e2578974daa,SOURCE_DERIVED_HIGH,final_marker_text,0.9,c5eb869965661a4fc3b8a8aaf313a22efd8aeb27f01b64e2774f4d9f4425f5dc,A
+"Please answer the following multiple-choice question:
+A 19 year old young girl with previous history of repeated pain over medial canthus and chronic use of nasal decongestants, presented with abrupt onset of fever with chills & rigor, diplopia on lateral gaze, moderate proptosis & chemosis. On examination optic disc is congested. Most likely diagnosis is?
+A. Cavernous sinus thrombosis
+B. Orbital cell ulitis
+C. Acute Ethmoidal sinusitis
+D. Orbital apex syndrome",,A,Cavernous sinus thrombosis,5782,4b66d86474ad760a0252e6e5ef709846dc277de437e59249e43e0b3059b622b7,SOURCE_DERIVED_HIGH,final_marker_text,0.9,c878e44d46b74ba04e1936bf15bd315ec59b0825a4aa19dafd24c0a5d81afb82,A
+"Please answer the following multiple-choice question:
+For RNA, which blotting technique is used?
+A. Western blot
+B. Nohern blot
+C. Southern blot
+D. None",,B,Nohern blot,2134,4793689f22b77ae09dafc1466c5c0b3d3578bcd975027455c9e77090806fe7f3,SOURCE_DERIVED_MODERATE,explicit_phrase_text,0.86,d076707112d8804e273a5bd0dd74eaf7024d9d209801cac2f52c1bff30d92f67,B
+"Please answer the following multiple-choice question:
+Casper's dictum for rate of decomposition in air: water: buried bodies is: TN 09?
+A. 8:04:01
+B. 4:02:01
+C. 1:02:04
+D. 1:04:08",,D,1:04:08,3232,9c54dbe1622de00811db4e7531ab4a5c29670849bbaefe9e0948dd52e1559d8f,SOURCE_DERIVED_HIGH,explicit_phrase_text,1.0,d2bf496c71740b6f6d3be0b90710d58062c6001998d8614f9a7494cc23ec4722,D
+"Please answer the following multiple-choice question:
+A 43-year-old man is hit in the face with a baseball bat and presents to the emergency department with massive facial swelling, ecchymosis, and an elongated face. There is mobility of the middle third of the face on digital manipulation of the maxilla. What is the likely diagnosis?
+A. Lambdoid injury
+B. Odontoid fracture
+C. LeFort III fracture
+D. Palatal split",,C,LeFort III fracture,8705,631b072fefae48cab2ad8ed73369f19f810cee5c4f4b2f24399b064afc701751,SOURCE_DERIVED_MODERATE,conclusion_sentence,0.76,d5786308bc7f7d5013eb5326f2297d5306654f4261036071644020b1b58ed23a,C
+"Please answer the following multiple-choice question:
+80 year old, asymptomatic man present with a Total Leucocyte Count of 1 lakh, with 80% lymphocytes and 20% PMC's. What is the most probable diagnosis?
+A. HIV
+B. CML
+C. CLL
+D. TB",,C,CLL,2521,859cc23bc6550b6d42bda202b5a788a912fdcb08c5cf74536c0d53f253ed7fce,SOURCE_DERIVED_MODERATE,conclusion_sentence,0.76,d670dd80316011fa003f97722236ed0d7fa0afd4afab0d7d3ed8488d17dc9587,C
+"Please answer the following multiple-choice question:
+A 25 year old colonscopy showed pigmentary deposits and microscopy showed pigment laden macrophages. The women in on laxatives for past one year. Which of the following is the cause of it ?
+A. Castor oil
+B. Bisacodyl
+C. Lactulose
+D. Senna",,D,Senna,6579,95125ce815c587ccf4a8e9325588c71ce883d8ad46a6b10dbe07aefd75f8c599,SOURCE_DERIVED_HIGH,final_marker_text,1.0,d90dc75737c08cbfe49916c2afb3bbf6b3e83a8035c31be32f4c02509155ae21,D
+"Please answer the following multiple-choice question:
+A 35 - year old male develops involvements of PIP,DIP and metacarpo phalangeal joints with sparing of wrist and carpometacarpal joints. The probable diagnosis is -?
+A. Psoriatic arthopathy
+B. Osteo arthritis
+C. Rheumatoid arthritis
+D. Pseudo gout",,C,Rheumatoid arthritis,7825,4249b2d64185d31f57e90b87251b950745c5913c332467df99c8bf66a55c965f,SOURCE_DERIVED_HIGH,final_marker_text,0.9,dc6276972f757161dc1c56fedfad5d03dc168f493d6209bde97d1fba233644c2,C
+"Please answer the following multiple-choice question:
+An 6 cm simple ovarian cyst was identified in late pregnancy, what would be the best management ?:?
+A. Emergency laparotomy
+B. Removal after after 6 weeks of puerperium
+C. Removal early in the puerperium
+D. Conservative as most tumors would subside",,C,Removal early in the puerperium,2317,5d1aa04b7a339e00d5fb25d11064e29a7e48076e8a11fc6e041ef69f77944128,SOURCE_DERIVED_MODERATE,tail_unique_option,0.8,e714fdc51939b2e5a61455033f4d0ec36fcc736d0bc8522621d4056d879beee2,C
+"Please answer the following multiple-choice question:
+Esthiomene is seen in:?
+A. Chancroid
+B. Granuloma inguinale
+C. LGV
+D. Syphilis",,C,LGV,3408,67d44fde15a8c19fd73e6564a9fec90ccbf04816d171244d8683b6a92ac42d9b,SOURCE_DERIVED_MODERATE,conclusion_sentence,0.76,eb864acbced3ff52e9d78d88960a6817a1cd8680d7a57b7c271c5aab888aa9de,C
+"Please answer the following multiple-choice question:
+Gravindrex test can detect pregnancy in: MAHE 12?
+A. 2 weeks
+B. 4 weeks
+C. 8 weeks
+D. 12 weeks",,A,2 weeks,828,0e8df758cc150b45d9cb5784d70f80b880fa83ab057dd60be9d1f08e8f9c813e,SOURCE_DERIVED_MODERATE,tail_unique_option,0.8,f900b6b214a4c1f290ffd8bd6b3679121cbad856b6a9372118d9f77aa8ead42c,A
+"Please answer the following multiple-choice question:
+A 49-year-old man is admitted to the emergency department with a cold and pale foot. Physical examination reveals that the patient suffers from peripheral vascular disease and his popliteal artery is occluded and no pulse is felt upon palpation. What is the landmark to feel the pulse of the femoral artery?
+A. Adductor canal
+B. Femoral triangle
+C. Popliteal fossa
+D. Inguinal canal",,B,Femoral triangle,9118,115f1452854ba603933700c02eef1be2cdb91008535170da02d60c790c3bab78,SOURCE_DERIVED_HIGH,final_marker_text,0.9,fed0d121b289748c978e0c04d1543829a5fbcbc6eab08acbbc82c1f15e3e747e,B
+"Please answer the following multiple-choice question:
+A 47-year-old female tennis professional is informed by her physician that she has a rotator cuff injury that will require surgery. Her physician explains that over the years of play a shoulder ligament has gradually caused severe damage to the underlying muscle. To which of the following ligaments is the physician most likely referring?
+A. Acromioclavicular ligament
+B. Coracohumeral ligament
+C. Glenohumeral ligament
+D. Coracoacromial ligament",,D,Coracoacromial ligament,9052,37c09d0c07520138acdb1391ce4365bc024cbf9909c3f468f41b30af6f5851a9,SOURCE_DERIVED_HIGH,final_marker_text,0.9,fee5187a6d8466bb59baee475894f7b8a421bf86db8ad0eb98d7688f62c73083,D

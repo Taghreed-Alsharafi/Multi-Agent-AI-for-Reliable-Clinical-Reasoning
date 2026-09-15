@@ -4,6 +4,8 @@
 
 <h1 align="center">Multi-Agent AI for Reliable Clinical Reasoning</h1>
 
+<p align="center"><strong>Backend research update: September 15, 2026</strong></p>
+
 <p align="center">
   <strong><a href="https://multi-agent-ai-clinical-reasoning.vercel.app/">Live research demo</a></strong>
 </p>
@@ -77,6 +79,15 @@ The report is emitted as a `consensus_done` event, passed to the Judge so it can
 out where the panel diverges, and rendered in the UI as a Panel Agreement card.
 
 See [`orchestrator/consensus.py`](orchestrator/consensus.py).
+
+The research evaluation layer also supports vote entropy, Jensen-Shannon divergence,
+uncertainty-aware Krippendorff's alpha, Kendall's W, pairwise Cohen's kappa, bootstrap
+confidence intervals, and McNemar significance tests. Reproducible implementations
+are in [`evaluation/agreement_analysis.py`](evaluation/agreement_analysis.py), with the
+dated summary in [`results/agreement-2026-09-15/final_main_comparison.csv`](results/agreement-2026-09-15/final_main_comparison.csv).
+
+All live clinical-agent roles default to the official `gpt-5-mini` model. Historical
+benchmark labels are retained exactly as run.
 
 ## Quick start
 

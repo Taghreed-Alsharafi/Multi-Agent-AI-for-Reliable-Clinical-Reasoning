@@ -11,6 +11,7 @@ from typing import Any
 from pydantic import BaseModel
 
 from .base import BaseAgent
+from config.settings import get_settings
 
 
 class JudgeResult(BaseModel):
@@ -43,6 +44,7 @@ class JudgeAgent(BaseAgent):
 
     def __init__(self) -> None:
         super().__init__()
+        self._model = get_settings().JUDGE_MODEL
         # Load professional skill set
         skill_instructions = self.load_skill("medical-judge")
         self.system_prompt = skill_instructions + JUDGE_JSON_FORMAT

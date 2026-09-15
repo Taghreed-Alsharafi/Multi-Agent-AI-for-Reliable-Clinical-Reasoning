@@ -10,9 +10,11 @@ class Settings(BaseSettings):
 
     # ── OpenAI ──────────────────────────────────────────────
     OPENAI_API_KEY: str = ""
-    OPENAI_MODEL: str = "gpt-4o-mini"
-    TRIAGE_MODEL: str = "gpt-4o-mini"
-    SAFETY_MODEL: str = "gpt-4o-mini"
+    OPENAI_MODEL: str = "gpt-5-mini"
+    TRIAGE_MODEL: str = "gpt-5-mini"
+    SPECIALIST_MODEL: str = "gpt-5-mini"
+    JUDGE_MODEL: str = "gpt-5-mini"
+    SAFETY_MODEL: str = "gpt-5-mini"
     TEMPERATURE: float = 0.2
     REQUEST_TIMEOUT: float = 60.0
     #: Retries per request for transient network failures.

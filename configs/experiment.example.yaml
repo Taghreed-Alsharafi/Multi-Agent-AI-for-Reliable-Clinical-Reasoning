@@ -1,0 +1,30 @@
+name: clinical-reasoning-comparison
+dataset: data/test_cases.jsonl
+output_dir: results/clinical-reasoning-comparison
+task_type: multiclass_classification
+temperature: 0.0
+repetitions: 1
+resume: true
+
+multi_agent_enabled: true
+multi_agent_provider: openai
+multi_agent_models:
+  supervisor: gpt-5-mini
+  specialist: gpt-5-mini
+  judge: gpt-5-mini
+  safety: gpt-5-mini
+
+single_agents:
+  - name: single_gpt
+    provider: openai
+    model: gpt-5-mini
+    enabled: true
+  - name: single_claude
+    provider: anthropic
+    model: claude-3-5-haiku-latest
+    enabled: true
+
+metrics:
+  bootstrap_samples: 2000
+  confidence_level: 0.95
+  positive_label: null
