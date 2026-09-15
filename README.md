@@ -94,25 +94,25 @@ answer options but use complementary reasoning roles: **direct diagnosis**,
 opinion**. Every agent returns one option, a confidence score, and a short rationale;
 agents do not see one another's initial responses.
 
-Agreement is evaluated from both answer consistency and confidence. Six candidate
-methods are compared on the development split only: vote entropy, Jensen-Shannon
-divergence, Krippendorff's alpha, uncertainty-aware alpha, Kendall's W, and CARE
-consensus. Selection follows a prespecified hierarchy: accuracy within one percentage
-point of the best result, then safety-error rate, Macro F1, and additional model calls.
-The selected policy is frozen before held-out testing.
+The final two-dataset framework uses confidence-weighted voting to summarize the
+panel. Three adjudication policies were compared on Dataset 1's development split:
+vote only, judge on disagreement, and always judge. The selected policy accepts a
+unanimous panel directly and calls the judge whenever two or more distinct answers
+are returned. The judge re-evaluates the original case and the agents' rationales
+rather than applying a simple majority vote.
 
-For the final framework, unanimous panels are accepted directly. Any disagreement
-(two or more distinct answers) triggers a judge that re-evaluates the original case
-and the agents' rationales instead of applying a simple majority vote. This selective
-adjudication policy was tuned only on Dataset 1's development split, evaluated on its
-1,583-case held-out test split, and then applied unchanged to all 1,200 MedQA-USMLE
-cases.
+This judge-on-disagreement policy was frozen before testing, evaluated on Dataset 1's
+1,583-case held-out split, and then applied unchanged to all 1,200 MedQA-USMLE cases.
+A separate locked 300-case agreement analysis evaluates vote entropy,
+Jensen-Shannon divergence, Krippendorff's alpha, uncertainty-aware alpha, Kendall's W,
+and CARE consensus; those methods are not the selection mechanism for the final
+two-dataset framework.
 
 All systems are compared on identical case IDs. Accuracy and Macro F1 are reported
 with bootstrap confidence intervals, and paired correctness differences are tested
 with McNemar's test. Implementations are in
 [`thesis_pipeline/multi_agent.py`](thesis_pipeline/multi_agent.py),
-[`thesis_pipeline/methods.py`](thesis_pipeline/methods.py), and
+[`tools/improved_dev_sweep.py`](tools/improved_dev_sweep.py), and
 [`evaluation/agreement_analysis.py`](evaluation/agreement_analysis.py).
 
 ## Quick start
