@@ -27,25 +27,34 @@ reproducible evaluation pipeline for comparing multi-agent and single-agent syst
 
 ## Results at a glance
 
-In the frozen 300-case evaluation, the strongest multi-agent agreement methods
-achieved **73.0% accuracy** with a **1.33% safety-violation rate**. The matched
-single-agent baseline achieved **72.0% accuracy** with a **2.33% safety-violation
-rate**. This corresponds to a **1.0 percentage-point accuracy improvement** and an
-approximately **43% relative reduction in observed safety violations**.
+The frozen multi-agent framework was evaluated on two medical MCQ datasets. Dataset 1
+used a held-out test split; Dataset 2 tested generalizability without further tuning.
 
-| Overall metric | Best multi-agent | Single agent |
-|---|---:|---:|
-| Cases evaluated | 300 | 300 |
-| Accuracy | **73.0%** | 72.0% |
-| Macro F1 | **81.7%** | 81.1% |
-| Weighted F1 | **73.0%** | 72.0% |
-| Macro precision | **82.3%** | 81.7% |
-| Macro recall | **81.6%** | 81.1% |
-| Safety-violation rate (lower is better) | **1.33%** | 2.33% |
+| Dataset | Evaluated cases | Multi-agent accuracy | Single-GPT accuracy | Multi-agent Macro F1 |
+|---|---:|---:|---:|---:|
+| Dataset 1, MedMCQA-style test split | 1,583 | **73.78%** | 72.84% | 69.32% |
+| Dataset 2, MedQA-USMLE | 1,200 | **89.75%** | 87.17% | **89.58%** |
 
-Multi-agent values are the best observed result for each metric across the evaluated
-agreement methods; they do not all come from one configuration. Results are
-experimental rather than clinical validation.
+On Dataset 1, the accuracy difference versus Single GPT was +0.95 percentage points
+(`p = 0.1548`). On Dataset 2, the improvement was +2.58 percentage points. These are
+experimental benchmark results, not clinical validation.
+
+An additional locked 300-case agreement-method analysis reached **73.0% accuracy**
+and a **1.33% safety-violation rate**, compared with **72.0%** and **2.33%** for its
+matched single-agent baseline.
+
+## Datasets
+
+| Dataset | Included data | Evaluation use |
+|---|---|---|
+| [Dataset 1](data/final_dataset_1_with_gold.csv) | 2,000 records; 1,998 eligible after excluding two unresolved labels | 415 development cases and 1,583 held-out test cases |
+| [Dataset 2](data/medqa_usmle_1200_with_gold.csv) | 1,200 MedQA-USMLE four-option records with built-in answer keys | All 1,200 cases used for external generalizability evaluation |
+
+Dataset 1 contains MedMCQA-style postgraduate questions. Its gold labels were
+extracted from the supplied explanations and accepted only when the model-assisted
+extraction agreed with deterministic option matching. Dataset 2 is a reproducible
+sample from the `GBaker/MedQA-USMLE-4-options-hf` test data and retains source labels;
+that distribution identifies its license as CC BY-SA 4.0.
 
 ## Pipeline
 
