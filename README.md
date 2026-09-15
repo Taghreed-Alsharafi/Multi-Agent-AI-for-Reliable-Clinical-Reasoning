@@ -103,10 +103,6 @@ rather than applying a simple majority vote.
 
 This judge-on-disagreement policy was frozen before testing, evaluated on Dataset 1's
 1,583-case held-out split, and then applied unchanged to all 1,200 MedQA-USMLE cases.
-A separate locked 300-case agreement analysis evaluates vote entropy,
-Jensen-Shannon divergence, Krippendorff's alpha, uncertainty-aware alpha, Kendall's W,
-and CARE consensus; those methods are not the selection mechanism for the final
-two-dataset framework.
 
 All systems are compared on identical case IDs. Statistical analysis includes:
 
