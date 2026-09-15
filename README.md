@@ -108,11 +108,20 @@ Jensen-Shannon divergence, Krippendorff's alpha, uncertainty-aware alpha, Kendal
 and CARE consensus; those methods are not the selection mechanism for the final
 two-dataset framework.
 
-All systems are compared on identical case IDs. Accuracy and Macro F1 are reported
-with bootstrap confidence intervals, and paired correctness differences are tested
-with McNemar's test. Implementations are in
+All systems are compared on identical case IDs. Statistical analysis includes:
+
+- **McNemar's test** for paired correctness differences between systems on the same
+  cases, using discordant pairs rather than treating predictions as independent.
+- **Cohen's kappa** for pairwise agreement beyond chance between agents or systems;
+  it measures consistency, not clinical correctness.
+- **Bootstrap confidence intervals** for accuracy, Macro F1, and paired performance
+  differences.
+
+Implementations are in
 [`thesis_pipeline/multi_agent.py`](thesis_pipeline/multi_agent.py),
-[`tools/improved_dev_sweep.py`](tools/improved_dev_sweep.py), and
+[`thesis_pipeline/statistics.py`](thesis_pipeline/statistics.py),
+[`tools/improved_dev_sweep.py`](tools/improved_dev_sweep.py),
+[`tools/analysis_lib.py`](tools/analysis_lib.py), and
 [`evaluation/agreement_analysis.py`](evaluation/agreement_analysis.py).
 
 ## Quick start
