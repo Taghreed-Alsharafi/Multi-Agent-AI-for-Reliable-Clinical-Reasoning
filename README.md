@@ -64,7 +64,7 @@ Question + Documents
  └──────────────┬───────────────┘
                 ▼
         ┌───────────────┐
-        │   Agreement   │  confidence averaging across the swarm
+        │   Agreement   │  quantifies consensus and uncertainty
         └───────┬───────┘
                 ▼
         ┌───────────────┐
@@ -80,37 +80,27 @@ Question + Documents
 
 ## Agreement methodology
 
-The live pipeline computes a transparent confidence-and-dispersion score. Each
-specialist reports confidence from 0 to 1, and the panel mean is discounted when
-specialist estimates diverge:
+Agreement is evaluated from both the agents' selected answers and their uncertainty.
+The framework distinguishes genuine consensus from agreement produced by weak or
+poorly calibrated confidence, and it preserves abstentions rather than forcing them
+into the majority calculation.
 
-```
-agreement  = mean_confidence × (1 − dispersion)
-dispersion = stdev(confidences) / 0.5
-```
+The evaluation compares complementary agreement methods:
 
-`0.5` is the largest standard deviation reachable by values bounded to 0-1, so
-`dispersion` lands in 0-1 and a fully split panel scores 0 no matter how confident its
-members are.
+- **Vote entropy** measures how concentrated or divided the panel's decisions are.
+- **Jensen-Shannon divergence** compares the agents' probability distributions.
+- **Krippendorff's alpha** and **Cohen's kappa** estimate agreement beyond chance.
+- **Uncertainty-aware alpha** reduces the influence of poorly supported confidence.
+- **Kendall's W** measures consistency across ranked judgments.
+- **CARE with a guideline guard** combines calibrated agreement with a narrow,
+  auditable safety rule.
 
-- Specialists reporting **zero** confidence are treated as **abstentions** and excluded
-  from the mean — finding nothing in your own domain is not the same as disagreeing.
-- Specialists more than one stdev from the mean are flagged as **outliers** — subject
-  to a 0.15 floor, so a tightly-clustered panel doesn't flag noise as dissent.
-- The score is labelled `strong` (≥0.75), `moderate` (≥0.5), `weak` (≥0.25), or `none`.
-
-The report is emitted as a `consensus_done` event, passed to the Judge so it can call
-out where the panel diverges, and rendered in the UI as a Panel Agreement card.
-
-See [`orchestrator/consensus.py`](orchestrator/consensus.py).
-
-The research evaluation layer additionally supports vote entropy, Jensen-Shannon
-divergence, uncertainty-aware Krippendorff's alpha, Kendall's W, pairwise Cohen's
-kappa, bootstrap confidence intervals, and McNemar significance tests. The methods
-are implemented in [`evaluation/agreement_analysis.py`](evaluation/agreement_analysis.py).
-
-All live clinical-agent roles default to the official `gpt-5-mini` model. Historical
-benchmark labels are retained exactly as run.
+Agreement does not determine correctness by itself. The final judge reviews the
+original case and specialist evidence, resolves conflicts by clinical relevance, and
+passes the result through an independent safety check. Performance differences are
+assessed on identical cases using bootstrap confidence intervals and paired McNemar
+testing. Implementations are available in
+[`evaluation/agreement_analysis.py`](evaluation/agreement_analysis.py).
 
 ## Quick start
 
@@ -127,14 +117,6 @@ backend, starts the frontend, waits for both to answer, and opens your browser.
 
 Nothing else needs to be installed or run. It's safe to re-run at any time, and it
 reuses a backend that's already running.
-
-**Ports.** The frontend uses 5173. If something else already holds that port the
-script stops and says so, rather than quietly landing on a different port and
-showing you the wrong app. Pass your own port to override:
-
-```
-start.bat 5199
-```
 
 <details>
 <summary>Running the two halves by hand</summary>
@@ -154,28 +136,10 @@ App at [localhost:5173](http://localhost:5173), Swagger docs at
 
 ## Vercel deployment
 
-This repo can be deployed as a single Vercel project:
-
-- the React UI is built from `frontend/`
-- the FastAPI backend is exposed from `api/main.py`
-- production WebSocket traffic uses `/api/ws/assess`
-
-The checked-in [`vercel.json`](vercel.json) sets:
-
-- `buildCommand` to build the Vite frontend
-- `outputDirectory` to `frontend/dist`
-- a 60-second `maxDuration` for `api/main.py`
-
-### Try the API directly
-
-```bash
-curl -X POST http://localhost:8000/assess \
-  -H "Content-Type: application/json" \
-  -d '{
-    "question": "What medications should be adjusted?",
-    "documents": ["Type 2 diabetes, HbA1c 9.2%, on Metformin 1000mg BID. eGFR 45."]
-  }'
-```
+The public research demonstration is available through the
+**[Live research demo](https://multi-agent-ai-clinical-reasoning.vercel.app/)**.
+Secrets are stored only in protected hosting settings and are not exposed in the
+repository or browser application.
 
 ## API
 
@@ -185,14 +149,8 @@ curl -X POST http://localhost:8000/assess \
 | `POST /assess` | Runs the full pipeline, returns the complete result |
 | `WS /ws/assess` | Same pipeline, streaming one JSON event per message |
 
-`POST /assess` returns `supervisor`, `specialist_opinions`, `consensus`,
-`judge_report`, and `safety_report`.
-
-The WebSocket takes `{"question": "...", "documents": ["..."]}` and streams
-`triage_thinking`, `triage_done`, `specialists_spawned`, `specialist_thinking`,
-`specialist_done`, `consensus_done`, `discussion_summary`, `judge_thinking`,
-`judge_done`, `safety_thinking`, `safety_done`, `agent_stream` (per-token), and a
-final `pipeline_complete`.
+The API supports standard assessments and live progress streaming while preserving
+the same supervisor, specialist, agreement, judge, and safety workflow.
 
 ## Documentation
 
@@ -231,26 +189,8 @@ pytest tests/ -v
 └── tests/
 ```
 
-Agent prompts live in `skills/<role>/SKILL.md` with extra material in
-`skills/<role>/references/` — both are loaded into the system prompt at construction,
-so you can tune agent behaviour without touching Python.
-
-## Configuration
-
-| Variable | Default | Description |
-|----------|---------|-------------|
-| `OPENAI_API_KEY` | *(required)* | Your OpenAI API key |
-| `OPENAI_MODEL` | `gpt-5-mini` | Shared fallback model |
-| `TRIAGE_MODEL` | `gpt-5-mini` | Model for the supervisor |
-| `SPECIALIST_MODEL` | `gpt-5-mini` | Model for specialist agents |
-| `JUDGE_MODEL` | `gpt-5-mini` | Model for the judge |
-| `SAFETY_MODEL` | `gpt-5-mini` | Model for the safety agent |
-| `TEMPERATURE` | `0.2` | Sampling temperature |
-| `REQUEST_TIMEOUT` | `60` | Per-request timeout, seconds |
-| `MAX_RETRIES` | `3` | Retries per request on transient network failures |
-| `VERIFY_SSL` | `true` | Set false only behind a TLS-intercepting proxy |
-| `MAX_SPECIALISTS` | `10` | Cap on specialists per request |
-| `CORS_ORIGINS` | `http://localhost:5173,...` | Comma-separated allowed origins |
+Agent roles and evaluation procedures are documented in the repository's `skills/`,
+`evaluation/`, and `docs/` directories.
 
 ## License
 
