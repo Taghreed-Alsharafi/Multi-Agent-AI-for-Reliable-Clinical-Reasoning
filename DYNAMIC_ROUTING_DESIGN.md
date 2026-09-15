@@ -1,6 +1,10 @@
-# Dynamic Domain Routing with One Strong-Model Call
+# Archived Hybrid Routing Experiment
 
-## Final per-case architecture
+> This document records the original mixed-model experimental design for
+> reproducibility. It is not the current live configuration. The public application
+> now defaults every clinical-agent role to `gpt-5-mini`.
+
+## Historical per-case architecture
 
 1. **Router — gpt-4o-mini**: reads the stem/options only, identifies clinical domains, determines complexity, chooses the smallest nonredundant set of 1–4 true clinical specialties, and names the lead specialty. It never answers the MCQ.
 2. **Domain specialists — gpt-4o-mini**: each selected specialty independently evaluates the case and returns an option, confidence, stem evidence, strongest alternative, and uncertainty.

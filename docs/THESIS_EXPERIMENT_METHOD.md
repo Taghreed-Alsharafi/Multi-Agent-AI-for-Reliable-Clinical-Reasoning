@@ -1,4 +1,20 @@
-# Thesis experiment method
+# Thesis Experiment Method and Overall Results
+
+**Updated: September 15, 2026**
+
+## Results at a glance
+
+The frozen 300-case evaluation found a best multi-agent accuracy of **73.0%** and a
+lowest observed multi-agent safety-violation rate of **1.33%**. The matched
+single-agent baseline achieved **72.0% accuracy** and a **2.33% safety-violation
+rate**. Overall, the multi-agent approach produced a modest accuracy gain and fewer
+observed safety violations in this experimental dataset.
+
+These findings support continued evaluation; they do not establish clinical safety
+or readiness for patient-care use. Detailed method-level results are retained in
+`results/agreement-2026-09-15/final_main_comparison.csv`.
+
+## Experimental workflow
 
 The documented workflow is: single-model baselines → development-only agreement-method comparison → automatic selection and freeze → held-out test comparison of Single GPT, Single Claude, and selected mixed GPT/Claude multi-agent.
 
@@ -6,4 +22,6 @@ The documented workflow is: single-model baselines → development-only agreemen
 
 Runs store dataset/label fingerprints, case IDs, configuration, prompt versions, assignments, predictions, metrics, checkpoints, figures, and four Word reports. Agreement selection is development-only and is frozen in `results/selection/selected_agreement_method.json`; final comparisons are paired by identical case IDs and labels.
 
-Live execution uses the existing OpenAI and Anthropic clients and reads keys from `.env` only. Use `mock=True` for offline pipeline/API-shape validation; mock predictions must not be used as thesis results.
+Live execution reads credentials from local environment variables only. Use
+`mock=True` for offline pipeline and API-shape validation; mock predictions must not
+be reported as thesis results.

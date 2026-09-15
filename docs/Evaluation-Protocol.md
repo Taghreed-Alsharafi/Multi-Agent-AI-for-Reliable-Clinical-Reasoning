@@ -1,12 +1,26 @@
 # Multi-Agent Versus Single-Agent Clinical Reasoning: Evaluation Protocol
 
+**Updated: September 15, 2026**
+
+## Overall evaluation result
+
+Across the frozen 300-case test set, the best-performing multi-agent agreement
+configurations achieved **73.0% accuracy** and a **1.33% safety-violation rate**. The
+matched single-agent baseline achieved **72.0% accuracy** and a **2.33%
+safety-violation rate**. The observed result favors the multi-agent approach on both
+headline measures, while the small accuracy difference and limited sample require
+cautious interpretation.
+
+This is a research evaluation, not clinical validation. Detailed method-level values
+are maintained in `results/agreement-2026-09-15/final_main_comparison.csv`.
+
 ## Study objective
 
 This experiment tests whether the repository's Supervisor → Specialists → Judge →
 Safety pipeline improves answer quality, factual grounding, abstention, and robustness
-relative to matched single-agent GPT and Claude baselines. This document is a
-preregisterable protocol. Numerical findings must only be added after a frozen test
-set is run; the included demonstration cases are software checks, not study evidence.
+relative to matched single-agent baselines. The protocol separates development-time
+selection from frozen test evaluation; demonstration cases remain software checks and
+are not treated as study evidence.
 
 ## Experimental design
 

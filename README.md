@@ -14,15 +14,33 @@
   Transparent specialist review, agreement analysis, and safety verification for clinical AI research.
 </p>
 
-A multi-agent pipeline that spawns a swarm of specialist AI agents to assess clinical
-documents, scores how much those specialists agree, consolidates their reviews, and
-verifies every claim against the source documents before showing it to a human.
+A research framework for dynamic, case-specific clinical reasoning. A supervisor
+selects the required specialties, independent agents review the evidence, agreement
+methods quantify consensus and uncertainty, a judge resolves disagreements, and a
+final safety agent checks the synthesized response against the supplied evidence.
 
-Ships with a FastAPI backend (REST + WebSocket streaming) and a React UI that renders
-each agent as it thinks.
+The repository combines a FastAPI backend, a streaming React interface, and a
+reproducible evaluation pipeline for comparing multi-agent and single-agent systems.
 
 > **Not a medical device.** This is a research/demo project. Nothing it produces is
 > clinical advice, and it must not be used to make patient care decisions.
+
+## Results at a glance
+
+In the frozen 300-case evaluation, the strongest multi-agent agreement methods
+achieved **73.0% accuracy** with a **1.33% safety-violation rate**. The matched
+single-agent baseline achieved **72.0% accuracy** with a **2.33% safety-violation
+rate**. This corresponds to a **1.0 percentage-point accuracy improvement** and an
+approximately **43% relative reduction in observed safety violations**.
+
+| Overall result | Multi-agent | Single agent |
+|---|---:|---:|
+| Cases evaluated | 300 | 300 |
+| Best accuracy | **73.0%** | 72.0% |
+| Lowest observed safety-violation rate | **1.33%** | 2.33% |
+
+These results are experimental rather than clinical validation. Full method-level
+metrics are available in the [dated results file](results/agreement-2026-09-15/final_main_comparison.csv).
 
 ## Pipeline
 
@@ -54,11 +72,11 @@ Question + Documents
          Verified Report
 ```
 
-## Agreement scoring
+## Agreement methodology
 
-Every specialist reports a `confidence` in 0-1. Averaging those alone is misleading —
-a panel split 0.1 / 0.9 averages to a comfortable-looking 0.5. So the mean is
-discounted by how far the scores spread apart:
+The live pipeline computes a transparent confidence-and-dispersion score. Each
+specialist reports confidence from 0 to 1, and the panel mean is discounted when
+specialist estimates diverge:
 
 ```
 agreement  = mean_confidence × (1 − dispersion)
@@ -80,11 +98,10 @@ out where the panel diverges, and rendered in the UI as a Panel Agreement card.
 
 See [`orchestrator/consensus.py`](orchestrator/consensus.py).
 
-The research evaluation layer also supports vote entropy, Jensen-Shannon divergence,
-uncertainty-aware Krippendorff's alpha, Kendall's W, pairwise Cohen's kappa, bootstrap
-confidence intervals, and McNemar significance tests. Reproducible implementations
-are in [`evaluation/agreement_analysis.py`](evaluation/agreement_analysis.py), with the
-dated summary in [`results/agreement-2026-09-15/final_main_comparison.csv`](results/agreement-2026-09-15/final_main_comparison.csv).
+The research evaluation layer additionally supports vote entropy, Jensen-Shannon
+divergence, uncertainty-aware Krippendorff's alpha, Kendall's W, pairwise Cohen's
+kappa, bootstrap confidence intervals, and McNemar significance tests. The methods
+are implemented in [`evaluation/agreement_analysis.py`](evaluation/agreement_analysis.py).
 
 All live clinical-agent roles default to the official `gpt-5-mini` model. Historical
 benchmark labels are retained exactly as run.
@@ -217,9 +234,11 @@ so you can tune agent behaviour without touching Python.
 | Variable | Default | Description |
 |----------|---------|-------------|
 | `OPENAI_API_KEY` | *(required)* | Your OpenAI API key |
-| `OPENAI_MODEL` | `gpt-4o-mini` | Model for specialist and judge agents |
-| `TRIAGE_MODEL` | `gpt-4o-mini` | Model for the supervisor |
-| `SAFETY_MODEL` | `gpt-4o-mini` | Model for the safety agent |
+| `OPENAI_MODEL` | `gpt-5-mini` | Shared fallback model |
+| `TRIAGE_MODEL` | `gpt-5-mini` | Model for the supervisor |
+| `SPECIALIST_MODEL` | `gpt-5-mini` | Model for specialist agents |
+| `JUDGE_MODEL` | `gpt-5-mini` | Model for the judge |
+| `SAFETY_MODEL` | `gpt-5-mini` | Model for the safety agent |
 | `TEMPERATURE` | `0.2` | Sampling temperature |
 | `REQUEST_TIMEOUT` | `60` | Per-request timeout, seconds |
 | `MAX_RETRIES` | `3` | Retries per request on transient network failures |

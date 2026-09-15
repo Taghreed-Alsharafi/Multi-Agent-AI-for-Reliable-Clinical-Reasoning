@@ -32,6 +32,9 @@ exact matching without model calls or guessing.
 
 ## Architecture
 
+> The architecture below is retained as a historical controlled experiment. The
+> current application configuration uses `gpt-5-mini` for every clinical-agent role.
+
 ```text
 Dataset QC
   -> dynamic clinical Router
