@@ -2,6 +2,7 @@ import React, { useState, useCallback, useRef } from 'react';
 import InputPanel from './components/InputPanel';
 import PipelineFlow from './components/PipelineFlow';
 import './App.css';
+import { readApiResponse } from './apiResponse';
 
 function resolveWebSocketUrl() {
   if (import.meta.env.VITE_WS_URL) {
@@ -118,7 +119,7 @@ function App() {
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ question, documents }),
         });
-        const triagePayload = await triageResponse.json();
+        const triagePayload = await readApiResponse(triageResponse);
         if (!triageResponse.ok) {
           throw new Error(
             triagePayload.detail || 'The specialist team could not be selected.',
@@ -179,7 +180,7 @@ function App() {
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ question, documents }),
         });
-        const payload = await response.json();
+        const payload = await readApiResponse(response);
         if (!response.ok) {
           throw new Error(payload.detail || 'The assessment could not be completed.');
         }

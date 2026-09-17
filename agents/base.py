@@ -76,9 +76,15 @@ class BaseAgent(ABC):
             # If no callback, we can use structured format directly. 
             # But if we want to stream AND have JSON, we usually have to parse the full string at the end.
             print(f"[{datetime.now().strftime('%H:%M:%S')}] {self.name}: Creating completion promise...")
+            # GPT-5-mini rejects temperature; minimal reasoning keeps demo latency down.
+            model_options = (
+                {"reasoning_effort": "minimal"}
+                if self._model.startswith(("gpt-5-mini", "gpt-5-nano"))
+                else {"temperature": self._temperature}
+            )
             completion_promise = self._client.chat.completions.create(
                 model=self._model,
-                temperature=self._temperature,
+                **model_options,
                 messages=[
                     {"role": "system", "content": self.system_prompt},
                     {"role": "user", "content": user_message},
@@ -96,6 +102,8 @@ class BaseAgent(ABC):
             if token_callback:
                 first_token = True
                 async for chunk in completion:
+                    if not chunk.choices:
+                        continue
                     if first_token:
                         print(f"[{datetime.now().strftime('%H:%M:%S')}] {self.name}: First token received")
                         first_token = False

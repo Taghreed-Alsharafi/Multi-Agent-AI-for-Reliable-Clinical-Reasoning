@@ -30,7 +30,7 @@ class Settings(BaseSettings):
     #: Comma-separated browser origins allowed to call the API.
     CORS_ORIGINS: str = "http://localhost:5173,http://127.0.0.1:5173"
 
-    model_config = {"env_file": ".env", "env_file_encoding": "utf-8"}
+    model_config = {"env_file": ".env", "env_file_encoding": "utf-8", "extra": "ignore"}
 
     @property
     def cors_origins(self) -> list[str]:
